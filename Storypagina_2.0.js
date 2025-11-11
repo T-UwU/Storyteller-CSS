@@ -1,13 +1,14 @@
 // ==UserScript==
-// @name         StoryPagina 2.0
+// @name         StoryPagina 2.4
 // @namespace    http://tampermonkey.net/
-// @version      2.2
-// @description  Script optimizado para mejorar la storypagina con tabla ordenable, total de horas, listas colapsables, filtro por fecha y header modernizado
+// @version      2.4
+// @description  Script optimizado con memoria de la última fecha registrada
 // @author       Isra
 // @match        https://enginyti.com/storytellers/alumno/ver_pendientes.php
 // @match        https://enginyti.com/storytellers/alumno/ver_actividades.php
 // @match        https://enginyti.com/storytellers/alumno/*
-// @grant        none
+// @grant        GM_setValue
+// @grant        GM_getValue
 // ==/UserScript==
 
 (() => {
@@ -53,6 +54,75 @@ const parseDate = text => {
         const year = new Date().getFullYear() - (m >= 7 ? 1 : 0);
         return new Date(year, m, parseInt(day.trim()));
     } catch { return null; }
+};
+
+// ==================== FUNCIONES DE PERSISTENCIA ====================
+
+// Guardar la última fecha utilizada
+const saveLastActivityDate = (dateValue) => {
+    if (typeof GM_setValue !== 'undefined') {
+        GM_setValue('lastActivityDate', dateValue);
+        GM_setValue('lastActivityTimestamp', new Date().getTime());
+    } else {
+        // Fallback a localStorage si GM_setValue no está disponible
+        localStorage.setItem('storytellers_lastActivityDate', dateValue);
+        localStorage.setItem('storytellers_lastActivityTimestamp', new Date().getTime());
+    }
+};
+
+// Obtener la última fecha utilizada
+const getLastActivityDate = () => {
+    let lastDate, lastTimestamp;
+
+    if (typeof GM_getValue !== 'undefined') {
+        lastDate = GM_getValue('lastActivityDate', null);
+        lastTimestamp = GM_getValue('lastActivityTimestamp', 0);
+    } else {
+        // Fallback a localStorage
+        lastDate = localStorage.getItem('storytellers_lastActivityDate');
+        lastTimestamp = parseInt(localStorage.getItem('storytellers_lastActivityTimestamp') || '0');
+    }
+
+    if (!lastDate) return null;
+
+    // Verificar que la fecha guardada no sea muy antigua (más de 30 días)
+    const thirtyDaysAgo = new Date().getTime() - (30 * 24 * 60 * 60 * 1000);
+    if (lastTimestamp < thirtyDaysAgo) {
+        return null;
+    }
+
+    return lastDate;
+};
+
+// Obtener la fecha más reciente de la tabla de actividades
+const getMostRecentActivityDate = () => {
+    const tables = $$('.modern-table, .table-striped');
+    let mostRecentDate = null;
+
+    tables.forEach(table => {
+        const rows = table.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+            // Buscar en la segunda columna que generalmente tiene la fecha
+            const dateCell = row.cells[1];
+            if (dateCell) {
+                const dateText = dateCell.textContent.trim();
+                const parsedDate = parseDate(dateText);
+                if (parsedDate && (!mostRecentDate || parsedDate > mostRecentDate)) {
+                    mostRecentDate = parsedDate;
+                }
+            }
+        });
+    });
+
+    if (mostRecentDate) {
+        // Convertir a formato YYYY-MM-DD para el input date
+        const year = mostRecentDate.getFullYear();
+        const month = (mostRecentDate.getMonth() + 1).toString().padStart(2, '0');
+        const day = mostRecentDate.getDate().toString().padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+    return null;
 };
 
 // ==================== CSS Y HEADER ====================
@@ -255,6 +325,9 @@ const modernizeForm = () => {
     const periodo = table.querySelector('input[name="id_periodo"]')?.value || '2024';
     const periodoDisplay = periodo === '2024' ? '2024-2025' : periodo;
 
+    // Obtener la fecha a usar (primero intenta la más reciente de la tabla, luego la guardada)
+    let defaultDate = getMostRecentActivityDate() || getLastActivityDate() || '';
+
     const timeOptions = Array.from({length: 24}, (_, i) => {
         const h = (i + 1) * 0.5;
         const hrs = Math.floor(h);
@@ -266,7 +339,12 @@ const modernizeForm = () => {
 
     form.innerHTML = `
         <div class="modern-form-container">
-            <div class="modern-form-header"><h2 class="modern-form-title">${svg('register')}${title}</h2></div>
+            <div class="modern-form-header">
+                <h2 class="modern-form-title">${svg('register')}${title}</h2>
+                <div id="dateMemoryIndicator" style="display: none; font-size: 12px; color: #059669; margin-left: auto;">
+                    ✓ Usando fecha de actividad reciente
+                </div>
+            </div>
             <div class="modern-form-content">
                 <form method="${origForm.method || 'post'}" action="${origForm.action || ''}" id="modernForm">
                     <div class="modern-info-row">
@@ -274,7 +352,13 @@ const modernizeForm = () => {
                         <div class="modern-info-item"><span class="modern-info-label">Periodo</span><span class="modern-info-value">${periodoDisplay}</span><input type="hidden" name="id_periodo" value="${periodo}"></div>
                     </div>
                     <div class="modern-form-grid">
-                        <div class="modern-form-group"><label class="modern-form-label required">Fecha de la actividad</label><input type="date" name="cuando" class="modern-input" required></div>
+                        <div class="modern-form-group">
+                            <label class="modern-form-label required">Fecha de la actividad</label>
+                            <input type="date" name="cuando" class="modern-input" id="activityDateInput" value="${defaultDate}" required>
+                            <small style="color: #6b7280; font-size: 12px; margin-top: 4px; display: block;">
+                                La fecha se recordará para la próxima vez
+                            </small>
+                        </div>
                         <div class="modern-form-group"><label class="modern-form-label required">Tiempo invertido</label><select name="horas_realizadas" class="modern-select" required><option value="">Seleccionar...</option>${timeOptions}</select></div>
                         <div class="modern-form-group"><label class="modern-form-label required">¿Qué tipo de actividad?</label><select name="tipo" class="modern-select" required><option value="">Seleccionar...</option>${selectOptions(['Cobertura de evento local','Cobertura de evento nacional','Contenido para Instagram / Facebook','Contenido para Tik Tok','Contenido para Proyecto Especial','Diseño gráfico','Edición de video','Grabación de video','Nota para CONECTA','Sesión de fotos','Actividades de oficina','Bootcamp','Junta','Otro'])}</select></div>
                         <div class="modern-form-group"><label class="modern-form-label required">Módulo de Aprendizaje</label><select name="modulo_aprendizaje" class="modern-select" required><option value="">Seleccionar...</option>${selectOptions(['Producción audiovisual','Comunicación oral','Redacción','Narrativa visual','Cobertura de eventos'])}</select></div>
@@ -299,10 +383,37 @@ const modernizeForm = () => {
             </div>
         </div>`;
 
+    // Mostrar indicador si se está usando una fecha guardada
+    if (defaultDate) {
+        const indicator = $('#dateMemoryIndicator');
+        if (indicator) {
+            indicator.style.display = 'block';
+            setTimeout(() => {
+                indicator.style.display = 'none';
+            }, 3000);
+        }
+    }
+
     // Setup form handlers
     const newForm = $('#modernForm');
+    const dateInput = $('#activityDateInput');
+
     if (newForm) {
+        // Guardar la fecha cuando cambie
+        if (dateInput) {
+            dateInput.addEventListener('change', function() {
+                if (this.value) {
+                    saveLastActivityDate(this.value);
+                }
+            });
+        }
+
         const submitForm = (action, name) => {
+            // Guardar la fecha antes de enviar el formulario
+            if (dateInput && dateInput.value) {
+                saveLastActivityDate(dateInput.value);
+            }
+
             newForm.action = action;
             const hidden = document.createElement('input');
             Object.assign(hidden, {type: 'hidden', name, value: name});
