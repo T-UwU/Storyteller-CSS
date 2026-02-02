@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         StoryPagina 2.4
+// @name         StoryPagina 2.5
 // @namespace    http://tampermonkey.net/
-// @version      2.4
-// @description  Script optimizado con memoria de la última fecha registrada
+// @version      2.5
+// @description  Script para mejorar la pagina de registro de horas de Storytellers
 // @author       Isra
 // @match        https://enginyti.com/storytellers/alumno/ver_pendientes.php
 // @match        https://enginyti.com/storytellers/alumno/ver_actividades.php
@@ -58,13 +58,31 @@ const parseDate = text => {
 
 // ==================== FUNCIONES DE PERSISTENCIA ====================
 
+// Guardar valor genérico
+const saveValue = (key, value) => {
+    if (typeof GM_setValue !== 'undefined') {
+        GM_setValue(key, value);
+    } else {
+        localStorage.setItem('storytellers_' + key, JSON.stringify(value));
+    }
+};
+
+// Obtener valor genérico
+const getValue = (key, defaultValue = null) => {
+    if (typeof GM_getValue !== 'undefined') {
+        return GM_getValue(key, defaultValue);
+    } else {
+        const stored = localStorage.getItem('storytellers_' + key);
+        return stored !== null ? JSON.parse(stored) : defaultValue;
+    }
+};
+
 // Guardar la última fecha utilizada
 const saveLastActivityDate = (dateValue) => {
     if (typeof GM_setValue !== 'undefined') {
         GM_setValue('lastActivityDate', dateValue);
         GM_setValue('lastActivityTimestamp', new Date().getTime());
     } else {
-        // Fallback a localStorage si GM_setValue no está disponible
         localStorage.setItem('storytellers_lastActivityDate', dateValue);
         localStorage.setItem('storytellers_lastActivityTimestamp', new Date().getTime());
     }
@@ -78,7 +96,6 @@ const getLastActivityDate = () => {
         lastDate = GM_getValue('lastActivityDate', null);
         lastTimestamp = GM_getValue('lastActivityTimestamp', 0);
     } else {
-        // Fallback a localStorage
         lastDate = localStorage.getItem('storytellers_lastActivityDate');
         lastTimestamp = parseInt(localStorage.getItem('storytellers_lastActivityTimestamp') || '0');
     }
@@ -92,6 +109,29 @@ const getLastActivityDate = () => {
     }
 
     return lastDate;
+};
+
+// Guardar configuración de controles de tabla
+const saveTableControls = (pageName, controls) => {
+    saveValue(`tableControls_${pageName}`, {
+        ...controls,
+        timestamp: new Date().getTime()
+    });
+};
+
+// Obtener configuración de controles de tabla
+const getTableControls = (pageName) => {
+    const controls = getValue(`tableControls_${pageName}`, null);
+
+    if (!controls) return null;
+
+    // Verificar que la configuración no sea muy antigua (más de 7 días)
+    const sevenDaysAgo = new Date().getTime() - (7 * 24 * 60 * 60 * 1000);
+    if (controls.timestamp < sevenDaysAgo) {
+        return null;
+    }
+
+    return controls;
 };
 
 // Obtener la fecha más reciente de la tabla de actividades
@@ -183,11 +223,11 @@ const createHeader = () => {
                 <div class="dropdown-container">
                     <button class="modern-user-menu" id="userDropdown">
                         <span class="modern-avatar">${userInitial}</span>
-                        <span class="modern-username">${userName.split(' ')[0]}</span>
+                        <span class="modern-username">${/*'Lily Sanchez'*/userName.split(' ')[0]}</span>
                         ${svg('chevron', 'chevron')}
                     </button>
                     <div class="dropdown-menu user-dropdown" id="userMenu">
-                        <div class="user-info"><div class="user-details"><p class="user-name">${userName}</p><p class="user-campus">${campus} - ${grado}</p></div></div>
+                        <div class="user-info"><div class="user-details"><p class="user-name">${userName/*'Lily Sanchez'*/}</p><p class="user-campus">${campus} - ${grado}</p></div></div>
                         <div class="dropdown-divider"></div>
                         <div class="leader-info"><span class="leader-label">Líder</span><div class="leader-details"><p class="leader-name">${lider}</p><p class="leader-email">${email}</p></div></div>
                         <div class="dropdown-divider"></div>
@@ -473,6 +513,9 @@ const initTable = () => {
     const tbody = table?.querySelector('tbody');
     if (!table || !tbody || $('.tm-ctrl')) return;
 
+    // Obtener nombre de página para guardar configuración específica
+    const pageName = page.replace('.php', '');
+
     const rows = Array.from(tbody.querySelectorAll('tr'));
     let headerRow = rows.find(row => row.querySelector('th') || row.classList.contains('bg_morado22'));
     let dataRows = rows.filter(row => row !== headerRow);
@@ -554,7 +597,7 @@ const initTable = () => {
         updateHours();
     };
 
-    const filter = () => {
+    const filter = (saveConfig = true) => {
         const from = fromInput.value ? new Date(fromInput.value) : null;
         const to = toInput.value ? new Date(toInput.value) : null;
         const base = selector.value === 'asc' ? sort() : selector.value === 'desc' ? sort(false) : original.slice();
@@ -568,9 +611,14 @@ const initTable = () => {
         tbody.append(...filtered.map(r => (r.style.display = '', r)));
         current = filtered.slice();
         updateHours();
+
+        // Guardar configuración después de filtrar
+        if (saveConfig) {
+            saveCurrentConfig();
+        }
     };
 
-    const reset = () => {
+    const reset = (saveConfig = true) => {
         fromInput.value = toInput.value = '';
         if (checkbox) checkbox.checked = true;
         const mode = selector.value;
@@ -578,11 +626,27 @@ const initTable = () => {
         else if (mode === 'desc') render(sort(false));
         else if (mode === 'semester') showSemester();
         else render(original.slice());
+
+        // Guardar configuración después de limpiar
+        if (saveConfig) {
+            saveCurrentConfig();
+        }
     };
 
     const updateHours = () => {
         const include = !isActividades || !checkbox || checkbox.checked;
         hours.textContent = `Horas: ${getHours(current, include).toFixed(2)}`;
+    };
+
+    // Función para guardar la configuración actual
+    const saveCurrentConfig = () => {
+        const config = {
+            viewMode: selector.value,
+            fromDate: fromInput.value,
+            toDate: toInput.value,
+            includePending: checkbox ? checkbox.checked : true
+        };
+        saveTableControls(pageName, config);
     };
 
     // Create controls
@@ -612,32 +676,80 @@ const initTable = () => {
     const checkbox = ctrl.querySelector('input[type="checkbox"]');
     const hours = ctrl.querySelector('.tm-hrs');
     const toggle = ctrl.querySelector('.tm-tgl');
+    const memoryIndicator = ctrl.querySelector('.tm-memory');
 
-    filterBtn.onclick = filter;
-    resetBtn.onclick = reset;
+    filterBtn.onclick = () => filter(true);
+    resetBtn.onclick = () => reset(true);
 
     if (checkbox) {
-        checkbox.onchange = updateHours;
+        checkbox.onchange = () => {
+            updateHours();
+            saveCurrentConfig();
+        };
         toggle?.addEventListener('click', e => {
             if (e.target !== checkbox) {
                 checkbox.checked = !checkbox.checked;
                 updateHours();
+                saveCurrentConfig();
             }
         });
     }
 
     selector.onchange = () => {
-        reset();
+        // No pasar saveConfig a reset porque vamos a guardar después
+        reset(false);
         const mode = selector.value;
         if (mode === 'asc') render(sort());
         else if (mode === 'desc') render(sort(false));
         else if (mode === 'semester') showSemester();
         else render(original.slice());
+
+        // Guardar configuración después de cambiar el modo
+        saveCurrentConfig();
     };
+
+    // Guardar configuración cuando cambian las fechas
+    fromInput.addEventListener('change', saveCurrentConfig);
+    toInput.addEventListener('change', saveCurrentConfig);
 
     const tableContainer = table.closest('.modern-table-container') || table.parentNode;
     tableContainer.parentNode.insertBefore(ctrl, tableContainer);
-    render(original.slice());
+
+    // Cargar configuración guardada
+    const savedConfig = getTableControls(pageName);
+
+    if (savedConfig) {
+        // Restaurar valores guardados
+        selector.value = savedConfig.viewMode || 'default';
+        fromInput.value = savedConfig.fromDate || '';
+        toInput.value = savedConfig.toDate || '';
+        if (checkbox) {
+            checkbox.checked = savedConfig.includePending !== false;
+        }
+
+        // Mostrar indicador de configuración restaurada
+        if (memoryIndicator) {
+            memoryIndicator.style.display = 'inline';
+            setTimeout(() => {
+                memoryIndicator.style.display = 'none';
+            }, 3000);
+        }
+
+        // Aplicar la vista guardada
+        const mode = selector.value;
+        if (mode === 'asc') render(sort());
+        else if (mode === 'desc') render(sort(false));
+        else if (mode === 'semester') showSemester();
+        else render(original.slice());
+
+        // Si hay fechas guardadas, aplicar el filtro
+        if (savedConfig.fromDate || savedConfig.toDate) {
+            filter(false); // No guardar de nuevo al restaurar
+        }
+    } else {
+        // Sin configuración guardada, mostrar vista por defecto
+        render(original.slice());
+    }
 };
 
 // ==================== INICIALIZACIÓN ====================
