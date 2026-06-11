@@ -19,8 +19,8 @@
 const cfg = {
     css: 'https://raw.githubusercontent.com/T-UwU/Storyteller-CSS/refs/heads/main/storyteller.css',
     cssLider: 'https://raw.githubusercontent.com/T-UwU/Storyteller-CSS/refs/heads/main/storyteller-lider.css',
-    fallback: `.tm-ctrl{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;margin:16px 0;display:flex;gap:12px}.header{display:none!important}.modern-header{background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:0;z-index:50}.modern-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;margin:20px auto;max-width:1200px}.modern-table{width:100%;border-collapse:collapse}`,
-    liderFallback: `.header{display:none!important}body.bg-amarillo,body.bg-verde{background:#f8fafc}.modern-header{background:#fff;border-bottom:1px solid #e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,.1);position:sticky;top:0;z-index:50}.modern-header-container{max-width:1200px;margin:0 auto;display:flex;height:4rem;align-items:center;justify-content:space-between;padding:0 1rem}.modern-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 4px 6px -1px rgba(0,0,0,.1);margin:20px auto;max-width:1200px}.modern-card-header{padding:24px 24px 16px;border-bottom:1px solid #f3f4f6}.modern-title{font-size:24px;font-weight:600;color:#111827;margin:0}.modern-card-content{padding:24px}.modern-table{width:100%;border-collapse:collapse;font-size:14px}.modern-th{padding:14px 10px;text-align:center;font-weight:600;color:#374151;font-size:12px;text-transform:uppercase;background:#f9fafb}.modern-td{padding:14px 10px;text-align:center;color:#374151}.modern-row{border-bottom:1px solid #f3f4f6}.modern-row:hover{background:#f9fafb}.modern-badge{display:inline-flex;align-items:center;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:600;color:#fff;text-decoration:none}.modern-badge-primary{background:#3b82f6}.modern-badge-success{background:#10b981}.modern-badge-warning{background:#f59e0b}.modern-badge-default{background:#6b7280}.lider-campus-section{margin-bottom:28px}.lider-campus-title{font-size:16px;color:#111827;margin:0 0 10px}.lider-campus-label{color:#3b82f6;font-weight:700}.lider-activity{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.lider-activity-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:12px 0}.lider-grade-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-top:8px}.lider-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.modern-form-btn{padding:10px 18px;border:none;border-radius:8px;color:#fff;font-weight:600;cursor:pointer;display:inline-flex;gap:6px;align-items:center}.lider-btn-ok{background:#10b981}.lider-btn-no{background:#f59e0b}.lider-btn-del{background:#dc2626}`,
+    fallback: `.tm-ctrl{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;margin:16px 0;display:flex;gap:12px}.header{display:none!important}.modern-header{background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:0;z-index:50}.modern-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;margin:20px auto;max-width:1200px}.modern-table{width:100%;border-collapse:collapse}.tm-dark-toggle{padding:.5rem}html.tm-dark body{background:#0f172a}html.tm-dark .modern-header,html.tm-dark .modern-card,html.tm-dark .modern-form-container{background:#1e293b;border-color:#334155}html.tm-dark .modern-title,html.tm-dark .modern-td,html.tm-dark .modern-info-value{color:#e2e8f0}html.tm-dark .modern-th{background:#273449;color:#94a3b8}html.tm-dark .modern-nav-item{color:#cbd5e1}html.tm-dark .modern-input,html.tm-dark .modern-select,html.tm-dark .modern-textarea,html.tm-dark .tm-ctrl select,html.tm-dark .tm-ctrl input[type=date]{background:#0f172a;border-color:#334155;color:#e2e8f0}`,
+    liderFallback: `.header{display:none!important}body.bg-amarillo,body.bg-verde{background:#f8fafc}.modern-header{background:#fff;border-bottom:1px solid #e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,.1);position:sticky;top:0;z-index:50}.modern-header-container{max-width:1200px;margin:0 auto;display:flex;height:4rem;align-items:center;justify-content:space-between;padding:0 1rem}.modern-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 4px 6px -1px rgba(0,0,0,.1);margin:20px auto;max-width:1200px}.modern-card-header{padding:24px 24px 16px;border-bottom:1px solid #f3f4f6}.modern-title{font-size:24px;font-weight:600;color:#111827;margin:0}.modern-card-content{padding:24px}.modern-table{width:100%;border-collapse:collapse;font-size:14px}.modern-th{padding:14px 10px;text-align:center;font-weight:600;color:#374151;font-size:12px;text-transform:uppercase;background:#f9fafb}.modern-td{padding:14px 10px;text-align:center;color:#374151}.modern-row{border-bottom:1px solid #f3f4f6}.modern-row:hover{background:#f9fafb}.modern-badge{display:inline-flex;align-items:center;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:600;color:#fff;text-decoration:none}.modern-badge-primary{background:#3b82f6}.modern-badge-success{background:#10b981}.modern-badge-warning{background:#f59e0b}.modern-badge-default{background:#6b7280}.lider-campus-section{margin-bottom:28px}.lider-campus-title{font-size:16px;color:#111827;margin:0 0 10px}.lider-campus-label{color:#3b82f6;font-weight:700}.lider-activity{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.lider-activity-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:12px 0}.lider-grade-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-top:8px}.lider-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.modern-form-btn{padding:10px 18px;border:none;border-radius:8px;color:#fff;font-weight:600;cursor:pointer;display:inline-flex;gap:6px;align-items:center}.lider-btn-ok{background:#10b981}.lider-btn-no{background:#f59e0b}.lider-btn-del{background:#dc2626}.tm-dark-toggle{padding:.5rem}.tm-count{font-size:13px;color:#6b7280;background:#f3f4f6;padding:6px 12px;border-radius:20px}.lider-summary{margin-bottom:16px}.lider-summary-label{display:block;font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;margin-bottom:8px}.lider-chips{display:flex;flex-wrap:wrap;gap:8px}.lider-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid #e2e8f0;border-radius:20px;background:#fff;color:#374151;font-size:13px;cursor:pointer}.lider-chip.active{background:#3b82f6;border-color:#3b82f6;color:#fff}.lider-chip-count{min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;background:#f59e0b;color:#fff;font-size:11px;font-weight:700}.tm-ctrl{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:12px;padding:12px 16px;margin-bottom:16px}.tm-search{position:relative;display:flex;align-items:center;flex:1 1 220px}.tm-search svg{position:absolute;left:10px;width:16px;height:16px;color:#9ca3af}.tm-search input{width:100%;padding-left:34px}.tm-ctrl input,.tm-ctrl select{font-size:13px;border:1px solid #d1d5db;border-radius:8px;background:#fff;padding:9px 12px}.tm-ctrl select{min-width:160px}.tm-btn{padding:9px 16px;border:none;border-radius:8px;color:#fff;font-weight:600;cursor:pointer}.tm-btn-s{background:#4b5563}html.tm-dark body,html.tm-dark body.bg-amarillo,html.tm-dark body.bg-verde{background:#0f172a}html.tm-dark .modern-header,html.tm-dark .modern-card,html.tm-dark .lider-activity{background:#1e293b;border-color:#334155}html.tm-dark .modern-title,html.tm-dark .lider-value,html.tm-dark .modern-td,html.tm-dark .lider-activity-title{color:#e2e8f0}html.tm-dark .modern-th{background:#273449;color:#94a3b8}html.tm-dark .modern-nav-item{color:#cbd5e1}html.tm-dark .modern-select,html.tm-dark .modern-textarea,html.tm-dark .tm-ctrl input,html.tm-dark .tm-ctrl select{background:#0f172a;border-color:#334155;color:#e2e8f0}html.tm-dark .tm-count,html.tm-dark .lider-chip{background:#273449;border-color:#334155;color:#cbd5e1}`,
     months: {ENE:0,FEB:1,MAR:2,ABR:3,MAY:4,JUN:5,JUL:6,AGO:7,SEP:8,OCT:9,NOV:10,DIC:11},
     pages: ['ver_actividades.php', 'ver_pendientes.php', 'ver_validadas.php']
 };
@@ -40,7 +40,10 @@ const icons = {
     clock: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
     users: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
     x: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
-    trash: '<path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>'
+    trash: '<path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
+    search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>',
+    moon: '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>'
 };
 
 // ==================== UTILIDADES ====================
@@ -218,6 +221,32 @@ const setupDropdowns = () => {
             menu.classList.toggle('show');
         };
     });
+};
+
+// ---- Modo oscuro (ambos roles) ----
+const applyDark = on => document.documentElement.classList.toggle('tm-dark', !!on);
+
+const addDarkToggle = () => {
+    const container = $('.modern-header-container');
+    if (!container || $('#tmDarkToggle')) return;
+    const btn = document.createElement('button');
+    btn.id = 'tmDarkToggle';
+    btn.className = 'modern-nav-item tm-dark-toggle';
+    const render = () => {
+        const dark = document.documentElement.classList.contains('tm-dark');
+        btn.title = dark ? 'Modo claro' : 'Modo oscuro';
+        btn.innerHTML = dark ? svg('sun') : svg('moon');
+    };
+    render();
+    btn.onclick = () => {
+        const on = !document.documentElement.classList.contains('tm-dark');
+        applyDark(on);
+        saveValue('darkMode', on);
+        render();
+    };
+    const userMenu = container.querySelector(':scope > .dropdown-container');
+    if (userMenu) container.insertBefore(btn, userMenu);
+    else container.appendChild(btn);
 };
 
 // ---- Header del LÍDER ----
@@ -1063,11 +1092,117 @@ const modernizeGradingPage = () => {
     activities.forEach(a => list.appendChild(buildGradeCard(a)));
 };
 
+// Pendientes del líder: tabla + búsqueda/filtros + resumen "por revisar por alumno"
+const modernizeLeaderPendientes = () => {
+    const main = $('main.content');
+    if (!main || main.classList.contains('modernized')) return;
+    main.classList.add('modernized');
+
+    const title = main.querySelector('h3')?.textContent?.trim() || 'Actividades pendientes';
+    const table = main.querySelector('table');
+    if (!table) return;
+    modernizeTable(table);
+
+    const rows = Array.from(table.querySelectorAll('tbody tr'));
+    // Columnas: 0 #, 1 matrícula, 2 nombre, 3 fecha, 4 horas, 5 tipo, 6 módulo, ...
+    const students = new Map(); // matrícula -> {nombre, count}
+    const tipos = new Set();
+    const modulos = new Set();
+    rows.forEach(r => {
+        const mat = r.cells[1]?.textContent.trim();
+        const nom = r.cells[2]?.textContent.trim();
+        const tipo = r.cells[5]?.textContent.trim();
+        const mod = r.cells[6]?.textContent.trim();
+        if (mat) {
+            if (!students.has(mat)) students.set(mat, {nombre: nom, count: 0});
+            students.get(mat).count++;
+        }
+        if (tipo) tipos.add(tipo);
+        if (mod) modulos.add(mod);
+    });
+
+    const opt = (v, t) => `<option value="${v}">${t}</option>`;
+    const studentsByCount = [...students.entries()].sort((a, b) => b[1].count - a[1].count);
+    const alumnoOpts = [...students.entries()]
+        .sort((a, b) => a[1].nombre.localeCompare(b[1].nombre))
+        .map(([mat, s]) => opt(mat, `${s.nombre} (${mat})`)).join('');
+    const tipoOpts = [...tipos].sort().map(t => opt(t, t)).join('');
+    const moduloOpts = [...modulos].sort().map(m => opt(m, m)).join('');
+
+    main.innerHTML = `
+        <div class="modern-card">
+            <div class="modern-card-header lider-pend-header">
+                <h2 class="modern-title">${title}</h2>
+                <span class="tm-count" id="pendCount"></span>
+            </div>
+            <div class="modern-card-content">
+                <div class="lider-summary">
+                    <span class="lider-summary-label">Por revisar por alumno</span>
+                    <div class="lider-chips" id="pendChips"></div>
+                </div>
+                <div class="tm-ctrl lider-ctrl">
+                    <div class="tm-search">${svg('search')}<input type="search" id="pendSearch" placeholder="Buscar matrícula, nombre, tipo…"></div>
+                    <select id="pendAlumno"><option value="">Todos los alumnos</option>${alumnoOpts}</select>
+                    <select id="pendTipo"><option value="">Todos los tipos</option>${tipoOpts}</select>
+                    <select id="pendModulo"><option value="">Todos los módulos</option>${moduloOpts}</select>
+                    <button class="tm-btn tm-btn-s" id="pendClear">Limpiar</button>
+                </div>
+                <div class="modern-table-container" id="pendTableWrap"></div>
+            </div>
+        </div>`;
+    $('#pendTableWrap').appendChild(table);
+
+    const searchInput = $('#pendSearch');
+    const alumnoSel = $('#pendAlumno');
+    const tipoSel = $('#pendTipo');
+    const moduloSel = $('#pendModulo');
+    const countLabel = $('#pendCount');
+    const chips = $('#pendChips');
+
+    const applyFilters = () => {
+        const q = searchInput.value.trim().toLowerCase();
+        const mat = alumnoSel.value, tipo = tipoSel.value, mod = moduloSel.value;
+        let visible = 0;
+        rows.forEach(r => {
+            const show = (!q || r.textContent.toLowerCase().includes(q))
+                && (!mat || r.cells[1]?.textContent.trim() === mat)
+                && (!tipo || r.cells[5]?.textContent.trim() === tipo)
+                && (!mod || r.cells[6]?.textContent.trim() === mod);
+            r.style.display = show ? '' : 'none';
+            if (show) visible++;
+        });
+        countLabel.textContent = `${visible} / ${rows.length} por revisar`;
+        chips.querySelectorAll('.lider-chip').forEach(c => c.classList.toggle('active', c.dataset.mat === mat));
+    };
+
+    // Chips por alumno (orden por cantidad de pendientes, desc)
+    studentsByCount.forEach(([mat, s]) => {
+        const chip = document.createElement('button');
+        chip.className = 'lider-chip';
+        chip.dataset.mat = mat;
+        chip.title = `${s.nombre} (${mat})`;
+        chip.innerHTML = `${s.nombre.split(' ')[0]} <span class="lider-chip-count">${s.count}</span>`;
+        chip.onclick = () => {
+            alumnoSel.value = (alumnoSel.value === mat) ? '' : mat; // alternar
+            applyFilters();
+        };
+        chips.appendChild(chip);
+    });
+
+    [searchInput, alumnoSel, tipoSel, moduloSel].forEach(el => el.addEventListener('input', applyFilters));
+    $('#pendClear').onclick = () => {
+        searchInput.value = ''; alumnoSel.value = ''; tipoSel.value = ''; moduloSel.value = '';
+        applyFilters();
+    };
+    applyFilters();
+};
+
 const initLider = () => {
     const page = location.pathname.split('/').pop();
     if (page.includes('ver_actividades_alumno_calificar')) modernizeGradingPage();
     else if (page === '' || page.includes('index') || page.includes('elige_alumno')) modernizeLeaderList();
-    else modernizeContent(); // pendientes, validadas, todas las actividades (una sola tabla)
+    else if (page.includes('ver_pendientes')) modernizeLeaderPendientes();
+    else modernizeContent(); // validadas, todas las actividades (una sola tabla)
 };
 
 // ==================== INICIALIZACIÓN ====================
@@ -1089,6 +1224,7 @@ const fixButtons = () => {
 
 const init = () => {
     createHeader();
+    addDarkToggle();
     if (isLider) {
         initLider();
     } else {
@@ -1108,6 +1244,9 @@ const app = async () => {
     const style = document.createElement('style');
     style.textContent = css;
     document.head.appendChild(style);
+
+    // Aplicar preferencia de modo oscuro guardada
+    applyDark(getValue('darkMode', false));
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);

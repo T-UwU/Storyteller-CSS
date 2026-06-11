@@ -776,3 +776,140 @@
     margin: 0 auto;
     display: block;
 }
+
+.tm-dark-toggle {
+    padding: .5rem;
+}
+
+/* ==================== MODO OSCURO ==================== */
+html.tm-dark body {
+    background: #0f172a;
+}
+
+html.tm-dark .modern-header {
+    background: #1e293b;
+    border-bottom-color: #334155;
+}
+
+html.tm-dark .modern-nav-item,
+html.tm-dark .modern-instagram,
+html.tm-dark .modern-user-menu {
+    color: #cbd5e1;
+}
+
+html.tm-dark .modern-nav-item:hover,
+html.tm-dark .modern-instagram:hover,
+html.tm-dark .modern-user-menu:hover {
+    background: #334155;
+    color: #f1f5f9;
+}
+
+html.tm-dark .modern-avatar {
+    background: #334155;
+    color: #e2e8f0;
+}
+
+html.tm-dark .dropdown-menu {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+html.tm-dark .dropdown-item {
+    color: #cbd5e1;
+}
+
+html.tm-dark .dropdown-item:hover {
+    background: #334155;
+    color: #fff;
+}
+
+html.tm-dark .dropdown-divider {
+    background: #334155;
+}
+
+html.tm-dark .user-name,
+html.tm-dark .leader-name {
+    color: #f1f5f9;
+}
+
+html.tm-dark .user-campus,
+html.tm-dark .user-id,
+html.tm-dark .leader-label,
+html.tm-dark .leader-email {
+    color: #94a3b8;
+}
+
+html.tm-dark .modern-card,
+html.tm-dark .modern-form-container {
+    background: #1e293b;
+    border-color: #334155;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, .4);
+}
+
+html.tm-dark .modern-card-header,
+html.tm-dark .modern-form-actions,
+html.tm-dark .modern-row,
+html.tm-dark .modern-table-container {
+    border-color: #334155;
+}
+
+html.tm-dark .modern-form-header {
+    background: #172033;
+    border-color: #334155;
+}
+
+html.tm-dark .modern-title,
+html.tm-dark .modern-form-title,
+html.tm-dark .modern-td,
+html.tm-dark .modern-info-value {
+    color: #e2e8f0;
+}
+
+html.tm-dark .modern-th,
+html.tm-dark .modern-form-label,
+html.tm-dark .modern-info-label,
+html.tm-dark .modern-radio-label,
+html.tm-dark .modern-radio-label {
+    color: #94a3b8;
+}
+
+html.tm-dark .modern-thead,
+html.tm-dark .modern-th {
+    background: #273449;
+}
+
+html.tm-dark .modern-row:hover {
+    background: #273449;
+}
+
+html.tm-dark .modern-input,
+html.tm-dark .modern-select,
+html.tm-dark .modern-textarea {
+    background: #0f172a;
+    border-color: #334155;
+    color: #e2e8f0;
+}
+
+html.tm-dark .modern-info-row {
+    background: #172033;
+    border-color: #334155;
+}
+
+html.tm-dark .tm-ctrl {
+    background: #172033;
+    border-color: #334155;
+}
+
+html.tm-dark .tm-ctrl label,
+html.tm-dark .tm-tgl span {
+    color: #cbd5e1;
+}
+
+html.tm-dark .tm-ctrl select,
+html.tm-dark .tm-ctrl input[type=date],
+html.tm-dark .tm-hrs,
+html.tm-dark .tm-tgl {
+    background: #0f172a;
+    border-color: #334155;
+    color: #e2e8f0;
+}
