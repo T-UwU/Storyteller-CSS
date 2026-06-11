@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         StoryPagina 2.5
+// @name         StoryPagina 2.6
 // @namespace    http://tampermonkey.net/
 // @version      2.6
 // @description  Script para mejorar la pagina de registro de horas de Storytellers (alumno y líder)

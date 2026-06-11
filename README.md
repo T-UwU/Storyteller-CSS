@@ -1,4 +1,4 @@
-# StoryPagina 2.6 – Mejoras para la página de Storytellers
+# StoryPagina 2.6: Mejoras para la página de Storytellers
 
 [![License: The Unlicense](https://img.shields.io/badge/License-Unlicense-yellow.svg)](LICENSE)  [![GitHub Repo](https://img.shields.io/badge/Repo-Storyteller--CSS-blue?logo=github)](https://github.com/T-UwU/Storyteller-CSS/tree/main)
 
@@ -45,13 +45,13 @@ Storyteller-CSS (root)
 ├── README.md                   # Este documento
 ├── storyteller.css             # Hoja de estilos para la vista de ALUMNO
 ├── storyteller-lider.css       # Hoja de estilos para la vista de LÍDER
-└── Storypagina_2.5.js          # Userscript para Tampermonkey (alumno + líder)
+└── Storypagina_2.6.js          # Userscript para Tampermonkey (alumno + líder)
 ```
 
 * **`storyteller.css`** / **`storyteller-lider.css`**
   Hojas de estilo de la página de Storytellers. El userscript descarga automáticamente la que corresponde al rol detectado (alumno o líder) desde este repositorio (`raw.githubusercontent.com`) y, si no está disponible, usa un CSS de respaldo embebido. También puedes cargarlas manualmente con **Stylus** o **Stylish**.
 
-* **`Storypagina_2.5.js`**
+* **`Storypagina_2.6.js`**
   **ÚNICAMENTE** este archivo es el que necesitas para montarlo en **Tampermonkey** (o Greasemonkey/Violentmonkey).
   Contiene el Userscript que inyecta funcionalidades y estilos dinámicos. Detecta el rol por la URL (`/alumno/` vs `/lider/`) y aplica la lógica adecuada.
 
@@ -74,10 +74,10 @@ Storyteller-CSS (root)
 
 2. **Instala el Userscript en Tampermonkey (solo necesitas el `.js`)**
 
-   > **Importante:** Solo ocupas `Storypagina_2.5.js` para montarlo en Tampermonkey y comenzar a usar las mejoras.
+   > **Importante:** Solo ocupas `Storypagina_2.6.js` para montarlo en Tampermonkey y comenzar a usar las mejoras.
 
    * Abre Tampermonkey en tu navegador → “Crear un nuevo script”.
-   * Copia y pega **TODO** el contenido de `Storypagina_2.5.js`.
+   * Copia y pega **TODO** el contenido de `Storypagina_2.6.js`.
    * Guarda (Ctrl + S). El `@match` ya está configurado para estas páginas:
 
      ```
@@ -139,7 +139,7 @@ https://github.com/user-attachments/assets/98c1f71d-5465-4706-ac18-45c105160b26
 * **Modificar Estilos (`storyteller.css`)**
   Ajusta colores, márgenes, fuentes o agrega nuevas reglas.
 * **Ajustar URLs en el Userscript**
-  Si cambian rutas o subdominios, edita las líneas `@match` en `Storypagina_2.5.js`:
+  Si cambian rutas o subdominios, edita las líneas `@match` en `Storypagina_2.6.js`:
 
   ```js
   // @match https://enginyti.com/storytellers/alumno/ver_pendientes.php
@@ -150,7 +150,7 @@ https://github.com/user-attachments/assets/98c1f71d-5465-4706-ac18-45c105160b26
 * **Cambiar el origen del CSS**
   El script descarga el CSS desde la constante `cfg.css`. Apúntala a tu propio fork/rama si lo necesitas; el `cfg.fallback` se usará solo si la descarga falla.
 * **Agregar Funcionalidades**
-  Dentro de `Storypagina_2.5.js` (en el IIFE principal), crea nuevas funciones o callbacks. Respeta la estructura antes del cierre `})();`.
+  Dentro de `Storypagina_2.6.js` (en el IIFE principal), crea nuevas funciones o callbacks. Respeta la estructura antes del cierre `})();`.
 
 ---
 
@@ -194,5 +194,5 @@ Este proyecto está bajo la **Licencia The Unlicense** (dominio público). Consu
 * ✉️ [a01276695@tec.mx](mailto:a01276695@tec.mx)
 * 🌐 [GitHub](https://github.com/T-UwU)
 
-> **¡Gracias por probar StoryPagina 2.5!**
+> **¡Gracias por probar StoryPagina 2.6!**
 > Si encuentras algún error o tienes sugerencias, abre un issue o contáctame directamente. 😊
