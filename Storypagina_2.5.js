@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         StoryPagina 2.5
 // @namespace    http://tampermonkey.net/
-// @version      2.5
-// @description  Script para mejorar la pagina de registro de horas de Storytellers
+// @version      2.6
+// @description  Script para mejorar la pagina de registro de horas de Storytellers (alumno y líder)
 // @author       Isra
 // @match        https://enginyti.com/storytellers/alumno/ver_pendientes.php
 // @match        https://enginyti.com/storytellers/alumno/ver_actividades.php
 // @match        https://enginyti.com/storytellers/alumno/*
+// @match        https://enginyti.com/storytellers/lider/*
 // @grant        GM_setValue
 // @grant        GM_getValue
 // ==/UserScript==
@@ -17,10 +18,15 @@
 // ==================== CONFIGURACIÓN ====================
 const cfg = {
     css: 'https://raw.githubusercontent.com/T-UwU/Storyteller-CSS/refs/heads/main/storyteller.css',
+    cssLider: 'https://raw.githubusercontent.com/T-UwU/Storyteller-CSS/refs/heads/main/storyteller-lider.css',
     fallback: `.tm-ctrl{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;margin:16px 0;display:flex;gap:12px}.header{display:none!important}.modern-header{background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:0;z-index:50}.modern-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;margin:20px auto;max-width:1200px}.modern-table{width:100%;border-collapse:collapse}`,
+    liderFallback: `.header{display:none!important}body.bg-amarillo,body.bg-verde{background:#f8fafc}.modern-header{background:#fff;border-bottom:1px solid #e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,.1);position:sticky;top:0;z-index:50}.modern-header-container{max-width:1200px;margin:0 auto;display:flex;height:4rem;align-items:center;justify-content:space-between;padding:0 1rem}.modern-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 4px 6px -1px rgba(0,0,0,.1);margin:20px auto;max-width:1200px}.modern-card-header{padding:24px 24px 16px;border-bottom:1px solid #f3f4f6}.modern-title{font-size:24px;font-weight:600;color:#111827;margin:0}.modern-card-content{padding:24px}.modern-table{width:100%;border-collapse:collapse;font-size:14px}.modern-th{padding:14px 10px;text-align:center;font-weight:600;color:#374151;font-size:12px;text-transform:uppercase;background:#f9fafb}.modern-td{padding:14px 10px;text-align:center;color:#374151}.modern-row{border-bottom:1px solid #f3f4f6}.modern-row:hover{background:#f9fafb}.modern-badge{display:inline-flex;align-items:center;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:600;color:#fff;text-decoration:none}.modern-badge-primary{background:#3b82f6}.modern-badge-success{background:#10b981}.modern-badge-warning{background:#f59e0b}.modern-badge-default{background:#6b7280}.lider-campus-section{margin-bottom:28px}.lider-campus-title{font-size:16px;color:#111827;margin:0 0 10px}.lider-campus-label{color:#3b82f6;font-weight:700}.lider-activity{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.lider-activity-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:12px 0}.lider-grade-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-top:8px}.lider-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.modern-form-btn{padding:10px 18px;border:none;border-radius:8px;color:#fff;font-weight:600;cursor:pointer;display:inline-flex;gap:6px;align-items:center}.lider-btn-ok{background:#10b981}.lider-btn-no{background:#f59e0b}.lider-btn-del{background:#dc2626}`,
     months: {ENE:0,FEB:1,MAR:2,ABR:3,MAY:4,JUN:5,JUL:6,AGO:7,SEP:8,OCT:9,NOV:10,DIC:11},
     pages: ['ver_actividades.php', 'ver_pendientes.php', 'ver_validadas.php']
 };
+
+// Rol actual según la URL (.../alumno/... o .../lider/...)
+const isLider = location.pathname.includes('/lider/');
 
 const icons = {
     home: '<path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
@@ -29,7 +35,12 @@ const icons = {
     activities: '<path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/>',
     chevron: '<path d="m6 9 6 6 6-6"/>',
     instagram: '<rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>',
-    logout: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16,17 21,12 16,7"/><line x1="21" x2="9" y1="12" y2="12"/>'
+    logout: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16,17 21,12 16,7"/><line x1="21" x2="9" y1="12" y2="12"/>',
+    check: '<path d="M20 6 9 17l-5-5"/>',
+    clock: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+    users: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+    x: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+    trash: '<path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>'
 };
 
 // ==================== UTILIDADES ====================
@@ -167,11 +178,13 @@ const getMostRecentActivityDate = () => {
 
 // ==================== CSS Y HEADER ====================
 const loadCSS = async () => {
+    const url = isLider ? cfg.cssLider : cfg.css;
+    const fb = isLider ? cfg.liderFallback : cfg.fallback;
     try {
-        const res = await fetch(cfg.css);
-        return res.ok ? await res.text() : cfg.fallback;
+        const res = await fetch(url);
+        return res.ok ? await res.text() : fb;
     } catch {
-        return cfg.fallback;
+        return fb;
     }
 };
 
@@ -195,8 +208,67 @@ const getUserInfo = () => {
     return {userName, userInitial: userName.charAt(0).toUpperCase(), grado, campus, lider, email};
 };
 
+const setupDropdowns = () => {
+    document.addEventListener('click', e => $$('.dropdown-menu').forEach(d => !d.closest('.dropdown-container').contains(e.target) && d.classList.remove('show')));
+    ['activities', 'user'].forEach(type => {
+        const btn = $(`#${type}Dropdown`), menu = $(`#${type}Menu`);
+        if (btn && menu) btn.onclick = e => {
+            e.stopPropagation();
+            $$('.dropdown-menu').forEach(m => m !== menu && m.classList.remove('show'));
+            menu.classList.toggle('show');
+        };
+    });
+};
+
+// ---- Header del LÍDER ----
+const getLeaderInfo = () => {
+    const box = $('.info-box.alumno');
+    const userName = box?.querySelector('p b')?.textContent?.trim() || 'Líder';
+    let tipo = '';
+    box?.querySelectorAll('h5').forEach(h5 => {
+        if (h5.textContent.trim() === 'Tipo') tipo = h5.nextElementSibling?.querySelector('b')?.textContent?.trim() || '';
+    });
+    return {userName, userInitial: userName.charAt(0).toUpperCase(), tipo};
+};
+
+const createLeaderHeader = () => {
+    const {userName, userInitial, tipo} = getLeaderInfo();
+    const header = document.createElement('div');
+    header.className = 'modern-header';
+    header.innerHTML = `
+        <div class="modern-header-container">
+            <div class="modern-header-left">
+                <a href="index.php" class="modern-logo"><img src="../img/Logo_ST.svg" alt="StoryTellers Logo"></a>
+                <a href="https://www.instagram.com/storytellers.tec" target="_blank" class="modern-instagram">${svg('instagram')}<span>@storytellers.tec</span></a>
+            </div>
+            <nav class="modern-nav">
+                <a href="index.php" class="modern-nav-item">${svg('home')}<span>Inicio</span></a>
+                <a href="ver_actividades.php" class="modern-nav-item">${svg('activities')}<span>Actividades</span></a>
+                <a href="ver_pendientes.php" class="modern-nav-item">${svg('clock')}<span>Pendientes</span></a>
+                <a href="ver_validadas.php" class="modern-nav-item">${svg('check')}<span>Validadas</span></a>
+                <a href="elige_alumno.php" class="modern-nav-item">${svg('users')}<span>Por Alumno</span></a>
+            </nav>
+            <div class="dropdown-container">
+                <button class="modern-user-menu" id="userDropdown">
+                    <span class="modern-avatar">${userInitial}</span>
+                    <span class="modern-username">${userName.split(' ')[0]}</span>
+                    ${svg('chevron', 'chevron')}
+                </button>
+                <div class="dropdown-menu user-dropdown" id="userMenu">
+                    <div class="user-info"><div class="user-details"><p class="user-name">${userName}</p><p class="user-campus">${tipo}</p></div></div>
+                    <div class="dropdown-divider"></div>
+                    <a href="../index.php" class="dropdown-item logout-item">${svg('logout')}Salir</a>
+                </div>
+            </div>
+        </div>`;
+    document.body.insertBefore(header, document.body.firstChild);
+    setupDropdowns();
+};
+
 const createHeader = () => {
-    if ($('.header') && !$('.modern-header')) {
+    if (!$('.header') || $('.modern-header')) return;
+    if (isLider) return createLeaderHeader();
+    {
         const {userName, userInitial, grado, campus, lider, email} = getUserInfo();
         const header = document.createElement('div');
         header.className = 'modern-header';
@@ -237,17 +309,7 @@ const createHeader = () => {
             </div>`;
 
         document.body.insertBefore(header, document.body.firstChild);
-
-        // Setup dropdowns
-        document.addEventListener('click', e => $$('.dropdown-menu').forEach(d => !d.closest('.dropdown-container').contains(e.target) && d.classList.remove('show')));
-        ['activities', 'user'].forEach(type => {
-            const btn = $(`#${type}Dropdown`), menu = $(`#${type}Menu`);
-            if (btn && menu) btn.onclick = e => {
-                e.stopPropagation();
-                $$('.dropdown-menu').forEach(m => m !== menu && m.classList.remove('show'));
-                menu.classList.toggle('show');
-            };
-        });
+        setupDropdowns();
     }
 };
 
@@ -832,6 +894,182 @@ const initTable = () => {
     }
 };
 
+// ==================== PÁGINAS DE LÍDER ====================
+
+// Lista de alumnos disponibles (index.php / elige_alumno.php): una tabla por campus
+const modernizeLeaderList = () => {
+    const main = $('main.content');
+    if (!main || main.classList.contains('modernized')) return;
+    main.classList.add('modernized');
+
+    const title = main.querySelector('h3')?.textContent?.trim() || 'Alumnos Disponibles';
+
+    const groups = [];
+    main.querySelectorAll('h2').forEach(h2 => {
+        const campus = h2.textContent.replace(/Campus:/i, '').trim();
+        const sib = h2.nextElementSibling;
+        const table = sib?.matches?.('table') ? sib : sib?.querySelector?.('table');
+        if (table) groups.push({campus, table});
+    });
+
+    main.innerHTML = `<div class="modern-card"><div class="modern-card-header"><h2 class="modern-title">${title}</h2></div><div class="modern-card-content" id="leaderGroups"></div></div>`;
+    const container = $('#leaderGroups');
+
+    groups.forEach(({campus, table}) => {
+        const section = document.createElement('div');
+        section.className = 'lider-campus-section';
+        const heading = document.createElement('h3');
+        heading.className = 'lider-campus-title';
+        heading.innerHTML = `<span class="lider-campus-label">Campus:</span> `;
+        heading.appendChild(document.createTextNode(campus));
+        section.appendChild(heading);
+        const wrap = document.createElement('div');
+        wrap.className = 'modern-table-container';
+        modernizeTable(table);
+        wrap.appendChild(table);
+        section.appendChild(wrap);
+        container.appendChild(section);
+    });
+};
+
+// Construye una tarjeta de calificación con su propio <form> funcional
+const buildGradeCard = (a) => {
+    const card = document.createElement('div');
+    card.className = 'lider-activity';
+
+    const form = document.createElement('form');
+    form.method = 'post';
+    form.className = 'lider-activity-form';
+
+    const evid = a.evidenciaHTML.replace(/<br\s*\/?>/gi, '').replace(/&nbsp;/g, '').trim();
+    const ubicTiempo = [a.ubicacion, a.tiempo].filter(Boolean).join(' · ');
+
+    form.innerHTML = `
+        <input type="hidden" name="id_actividad" value="${a.idActividad}">
+        <input type="hidden" name="matricula" value="${a.matricula}">
+        <div class="lider-activity-head">
+            <div class="lider-activity-meta">
+                <span class="modern-badge modern-badge-primary">#${a.num}</span>
+                <span class="modern-badge modern-badge-default">ID ${a.idActividad}</span>
+                <span class="lider-date">${a.fecha}</span>
+                <span class="lider-tipo">${a.tipo}</span>
+            </div>
+            <h3 class="lider-activity-title"></h3>
+        </div>
+        <div class="lider-activity-grid">
+            <div class="lider-field"><span class="lider-label">Módulo</span><span class="lider-value" data-f="modulo"></span></div>
+            <div class="lider-field"><span class="lider-label">Categoría</span><span class="lider-value" data-f="categoria"></span></div>
+            <div class="lider-field"><span class="lider-label">Ubicación / Tiempo</span><span class="lider-value">${ubicTiempo || '—'}</span></div>
+            <div class="lider-field"><span class="lider-label">Evidencia</span><span class="lider-value lider-evid">${evid || '—'}</span></div>
+            <div class="lider-field lider-field-wide"><span class="lider-label">Descripción</span><span class="lider-value" data-f="descripcion"></span></div>
+        </div>
+        <div class="lider-grade-row"></div>
+        <div class="lider-actions">
+            <button type="submit" name="Registrar" class="modern-form-btn lider-btn-ok">${svg('check')}Validar</button>
+            <button type="submit" name="Rechazar" class="modern-form-btn lider-btn-no">${svg('x')}Rechazar</button>
+            <button type="submit" name="Eliminar" class="modern-form-btn lider-btn-del">${svg('trash')}Eliminar</button>
+        </div>`;
+
+    // Texto libre por propiedad (evita inyección al renderizar)
+    form.querySelector('.lider-activity-title').textContent = a.nombre || '(Sin nombre)';
+    form.querySelector('[data-f="modulo"]').textContent = a.modulo;
+    form.querySelector('[data-f="categoria"]').textContent = a.categoria;
+    form.querySelector('[data-f="descripcion"]').textContent = a.descripcion || '—';
+
+    // Mover los controles originales (conservan sus opciones y selección)
+    const gradeRow = form.querySelector('.lider-grade-row');
+    const mountControl = (labelText, node, cls) => {
+        if (!node) return;
+        const wrap = document.createElement('label');
+        wrap.className = 'lider-control' + (cls ? ' ' + cls : '');
+        const lbl = document.createElement('span');
+        lbl.className = 'lider-label';
+        lbl.textContent = labelText;
+        node.classList.add(node.tagName === 'TEXTAREA' ? 'modern-textarea' : 'modern-select');
+        wrap.appendChild(lbl);
+        wrap.appendChild(node);
+        gradeRow.appendChild(wrap);
+    };
+    mountControl('Tiempo', a.horasSel);
+    mountControl('Calificación', a.califSel);
+    mountControl('Comentario', a.comenta, 'lider-control-wide');
+
+    // Acciones (envío POST con el nombre del botón en un hidden)
+    const submitWith = (action, btnName, confirmMsg) => {
+        if (confirmMsg && !confirm(confirmMsg)) return;
+        form.action = action;
+        const h = document.createElement('input');
+        Object.assign(h, {type: 'hidden', name: btnName, value: btnName});
+        form.appendChild(h);
+        form.submit();
+    };
+    const elim = a.actElimina || `eliminar_actividad.php?id_actividad=${a.idActividad}&nav=4&matricula=${a.matricula}`;
+    form.querySelector('button[name="Registrar"]').addEventListener('click', e => { e.preventDefault(); submitWith(a.actValida, 'Registrar'); });
+    form.querySelector('button[name="Rechazar"]').addEventListener('click', e => { e.preventDefault(); submitWith(a.actRechaza, 'Rechazar', '¿Rechazar esta actividad?'); });
+    form.querySelector('button[name="Eliminar"]').addEventListener('click', e => { e.preventDefault(); submitWith(elim, 'Eliminar', '¿Eliminar esta actividad? Esta acción no se puede deshacer.'); });
+
+    card.appendChild(form);
+    return card;
+};
+
+// Página de calificar (ver_actividades_alumno_calificar.php)
+const modernizeGradingPage = () => {
+    const main = $('main.content');
+    if (!main || main.classList.contains('modernized')) return;
+    main.classList.add('modernized');
+
+    const heading = main.querySelector('h3');
+    const titleHTML = heading ? heading.innerHTML : 'Calificar actividades';
+    const table = main.querySelector('table');
+    if (!table) return;
+
+    // id_actividad / matricula pueden quedar "foster-parented" fuera de las filas;
+    // se recogen en orden de documento y se emparejan por índice con las filas.
+    const idInputs = Array.from(main.querySelectorAll('input[name="id_actividad"]')).map(i => i.value);
+    const matInputs = Array.from(main.querySelectorAll('input[name="matricula"]')).map(i => i.value);
+    const matFromUrl = new URLSearchParams(location.search).get('matricula') || '';
+
+    const dataRows = Array.from(table.querySelectorAll('tr')).filter(r => r.querySelector('td') && !r.querySelector('th'));
+    const grab = (cell, name) => cell?.querySelector(`button[name="${name}"]`)?.getAttribute('onclick')?.match(/this\.form\.action\s*=\s*['"]([^'"]+)['"]/)?.[1];
+
+    const activities = dataRows.map((tr, i) => {
+        const c = tr.cells;
+        const meta = (c[0]?.innerHTML || '').split(/<br\s*\/?>/i).map(s => s.replace(/<[^>]*>/g, '').trim()).filter(Boolean);
+        const ubic = (c[6]?.innerHTML || '').split(/<br\s*\/?>/i).map(s => s.replace(/<[^>]*>/g, '').trim()).filter(Boolean);
+        return {
+            idActividad: idInputs[i] || meta[1] || '',
+            matricula: matInputs[i] || matFromUrl,
+            num: meta[0] || String(i + 1),
+            fecha: meta[2] || meta[meta.length - 1] || '',
+            tipo: c[1]?.textContent.trim() || '',
+            modulo: c[2]?.textContent.trim() || '',
+            categoria: c[3]?.textContent.trim() || '',
+            nombre: c[4]?.textContent.trim() || '',
+            descripcion: c[5]?.querySelector('.tooltiptext2')?.textContent.trim() || '',
+            ubicacion: ubic[0] || '',
+            tiempo: ubic[1] || '',
+            evidenciaHTML: ((c[7]?.innerHTML || '') + (c[8]?.innerHTML || '')),
+            horasSel: c[10]?.querySelector('select[name="horas_realizadas"]') || null,
+            califSel: c[10]?.querySelector('select[name="calificacion"]') || null,
+            comenta: c[10]?.querySelector('textarea[name="comenta"]') || null,
+            actValida: grab(c[9], 'Registrar') || 'valida_rapido.php',
+            actRechaza: grab(c[9], 'Rechazar') || 'rechaza_rapido.php',
+            actElimina: grab(c[9], 'Eliminar') || ''
+        };
+    });
+
+    main.innerHTML = `<div class="modern-card"><div class="modern-card-header"><h2 class="modern-title lider-grade-title">${titleHTML}</h2></div><div class="modern-card-content" id="gradeList"></div></div>`;
+    const list = $('#gradeList');
+    activities.forEach(a => list.appendChild(buildGradeCard(a)));
+};
+
+const initLider = () => {
+    const page = location.pathname.split('/').pop();
+    if (page.includes('ver_actividades_alumno_calificar')) modernizeGradingPage();
+    else if (page === '' || page.includes('index') || page.includes('elige_alumno')) modernizeLeaderList();
+    else modernizeContent(); // pendientes, validadas, todas las actividades (una sola tabla)
+};
+
 // ==================== INICIALIZACIÓN ====================
 const fixButtons = () => {
     $$('input[type="submit"][onclick*="form.action"]').forEach(btn => {
@@ -851,9 +1089,13 @@ const fixButtons = () => {
 
 const init = () => {
     createHeader();
-    modernizeContent();
-    modernizeForm();
-    initTable();
+    if (isLider) {
+        initLider();
+    } else {
+        modernizeContent();
+        modernizeForm();
+        initTable();
+    }
     setTimeout(fixButtons, 200);
 };
 

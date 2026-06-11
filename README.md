@@ -1,16 +1,23 @@
-# StoryPagina 2.5 – Mejoras para la página de Storytellers
+# StoryPagina 2.6 – Mejoras para la página de Storytellers
 
 [![License: The Unlicense](https://img.shields.io/badge/License-Unlicense-yellow.svg)](LICENSE)  [![GitHub Repo](https://img.shields.io/badge/Repo-Storyteller--CSS-blue?logo=github)](https://github.com/T-UwU/Storyteller-CSS/tree/main)
 
-Un proyecto que agrupa un **Userscript** y un **archivo de estilos CSS** para optimizar y personalizar la experiencia al registrar horas y navegar en la página de **Storytellers**. Con _StoryPagina 2.5_ podrás:
+Un proyecto que agrupa un **Userscript** y sus **hojas de estilo CSS** para optimizar y personalizar la experiencia al registrar y validar horas en la página de **Storytellers**. Funciona tanto para la vista de **alumno** como para la de **líder** (el script detecta el rol por la URL). Con _StoryPagina 2.6_ podrás:
 
+**Como alumno:**
 - Ordenar la tabla de actividades/horas por fecha (ascendente/descendente).
 - Mostrar el total de horas acumuladas, con opción de incluir o no las pendientes.
 - Agrupar actividades en listas colapsables por semestre.
 - Filtrar registros por rango de fechas.
 - Recordar la última fecha y los filtros usados entre sesiones.
-- Modernizar el header, las tablas y el formulario de registro.
-- Aplicar estilos visuales más amigables y compactos.
+- Modernizar el header, las tablas y el formulario de registro (incluida la edición de borradores y los mensajes de error del servidor).
+
+**Como líder:**
+- Lista de alumnos disponibles agrupada por campus.
+- Página de calificación rediseñada como tarjetas, con su formulario reconstruido (Validar / Rechazar / Eliminar funcionan correctamente).
+- Vistas de pendientes, validadas y todas las actividades modernizadas.
+
+En ambos roles se aplica un diseño más amigable y compacto.
 
 ---
 
@@ -36,16 +43,17 @@ Un proyecto que agrupa un **Userscript** y un **archivo de estilos CSS** para op
 Storyteller-CSS (root)
 ├── LICENSE                     # Archivo de licencia (The Unlicense)
 ├── README.md                   # Este documento
-├── storyteller.css             # Hoja de estilos principal
-└── Storypagina_2.5.js          # Userscript para Tampermonkey
+├── storyteller.css             # Hoja de estilos para la vista de ALUMNO
+├── storyteller-lider.css       # Hoja de estilos para la vista de LÍDER
+└── Storypagina_2.5.js          # Userscript para Tampermonkey (alumno + líder)
 ```
 
-* **`storyteller.css`**
-  Hoja de estilos adicional para la página de Storytellers. El userscript la descarga automáticamente desde este repositorio (`raw.githubusercontent.com`) y, si no está disponible, usa un CSS de respaldo embebido. También puedes cargarla manualmente con **Stylus** o **Stylish**.
+* **`storyteller.css`** / **`storyteller-lider.css`**
+  Hojas de estilo de la página de Storytellers. El userscript descarga automáticamente la que corresponde al rol detectado (alumno o líder) desde este repositorio (`raw.githubusercontent.com`) y, si no está disponible, usa un CSS de respaldo embebido. También puedes cargarlas manualmente con **Stylus** o **Stylish**.
 
 * **`Storypagina_2.5.js`**
   **ÚNICAMENTE** este archivo es el que necesitas para montarlo en **Tampermonkey** (o Greasemonkey/Violentmonkey).
-  Contiene el Userscript que inyecta funcionalidades y estilos dinámicos en la página de Storytellers.
+  Contiene el Userscript que inyecta funcionalidades y estilos dinámicos. Detecta el rol por la URL (`/alumno/` vs `/lider/`) y aplica la lógica adecuada.
 
 ---
 
@@ -76,6 +84,7 @@ Storyteller-CSS (root)
      https://enginyti.com/storytellers/alumno/ver_pendientes.php
      https://enginyti.com/storytellers/alumno/ver_actividades.php
      https://enginyti.com/storytellers/alumno/*
+     https://enginyti.com/storytellers/lider/*
      ```
    * Refresca la página de Storytellers; el script se cargará automáticamente.
 
@@ -136,6 +145,7 @@ https://github.com/user-attachments/assets/98c1f71d-5465-4706-ac18-45c105160b26
   // @match https://enginyti.com/storytellers/alumno/ver_pendientes.php
   // @match https://enginyti.com/storytellers/alumno/ver_actividades.php
   // @match https://enginyti.com/storytellers/alumno/*
+  // @match https://enginyti.com/storytellers/lider/*
   ```
 * **Cambiar el origen del CSS**
   El script descarga el CSS desde la constante `cfg.css`. Apúntala a tu propio fork/rama si lo necesitas; el `cfg.fallback` se usará solo si la descarga falla.
