@@ -223,11 +223,11 @@ const createHeader = () => {
                 <div class="dropdown-container">
                     <button class="modern-user-menu" id="userDropdown">
                         <span class="modern-avatar">${userInitial}</span>
-                        <span class="modern-username">${/*'Lily Sanchez'*/userName.split(' ')[0]}</span>
+                        <span class="modern-username">${userName.split(' ')[0]}</span>
                         ${svg('chevron', 'chevron')}
                     </button>
                     <div class="dropdown-menu user-dropdown" id="userMenu">
-                        <div class="user-info"><div class="user-details"><p class="user-name">${userName/*'Lily Sanchez'*/}</p><p class="user-campus">${campus} - ${grado}</p></div></div>
+                        <div class="user-info"><div class="user-details"><p class="user-name">${userName}</p><p class="user-campus">${campus} - ${grado}</p></div></div>
                         <div class="dropdown-divider"></div>
                         <div class="leader-info"><span class="leader-label">Líder</span><div class="leader-details"><p class="leader-name">${lider}</p><p class="leader-email">${email}</p></div></div>
                         <div class="dropdown-divider"></div>
@@ -361,8 +361,8 @@ const modernizeForm = () => {
 
     if (!origForm || !table) return;
 
-    const matricula = table.querySelector('input[name="matricula"]')?.value || 'A01276695';
-    const periodo = table.querySelector('input[name="id_periodo"]')?.value || '2024';
+    const matricula = table.querySelector('input[name="matricula"]')?.value || '';
+    const periodo = table.querySelector('input[name="id_periodo"]')?.value || '';
     const periodoDisplay = periodo === '2024' ? '2024-2025' : periodo;
 
     // Obtener la fecha a usar (primero intenta la más reciente de la tabla, luego la guardada)
