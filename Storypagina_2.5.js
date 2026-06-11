@@ -361,21 +361,56 @@ const modernizeForm = () => {
 
     if (!origForm || !table) return;
 
-    const matricula = table.querySelector('input[name="matricula"]')?.value || '';
-    const periodo = table.querySelector('input[name="id_periodo"]')?.value || '';
-    const periodoDisplay = periodo === '2024' ? '2024-2025' : periodo;
+    // ===== Leer valores ya cargados del formulario original (modo edición) =====
+    const fieldValue = name => origForm.querySelector(`[name="${name}"]`)?.value || '';
+    const selectValue = name => {
+        const sel = origForm.querySelector(`select[name="${name}"]`);
+        return sel ? (sel.value || sel.querySelector('option[selected]')?.value || '') : '';
+    };
 
-    // Obtener la fecha a usar (primero intenta la más reciente de la tabla, luego la guardada)
-    let defaultDate = getMostRecentActivityDate() || getLastActivityDate() || '';
+    const idActividad = fieldValue('id_actividad');
+    const isEdit = !!idActividad || location.pathname.includes('formulario_editar.php');
+
+    const existing = {
+        cuando: fieldValue('cuando'),
+        horas_realizadas: selectValue('horas_realizadas'),
+        tipo: selectValue('tipo'),
+        modulo_aprendizaje: selectValue('modulo_aprendizaje'),
+        categoria: selectValue('categoria'),
+        ubicacion_evento: selectValue('ubicacion_evento'),
+        nombre_evento: fieldValue('nombre_evento'),
+        descripcion: origForm.querySelector('textarea[name="descripcion"]')?.value || '',
+        publicacion_tec: origForm.querySelector('input[name="publicacion_tec"]:checked')?.value ?? '0',
+        evidencia_1: fieldValue('evidencia_1'),
+        evidencia_2: fieldValue('evidencia_2'),
+        evidencia_3: fieldValue('evidencia_3')
+    };
+
+    // Acciones reales tomadas de los botones originales (registrar_* o editar_*)
+    const btnAction = btnName => origForm.querySelector(`input[name="${btnName}"]`)
+        ?.getAttribute('onclick')?.match(/this\.form\.action\s*=\s*['"]([^'"]+)['"]/)?.[1];
+    const actions = {
+        Borrador: btnAction('Borrador') || (isEdit ? 'editar_borrador.php' : 'registrar_borrador.php'),
+        Registrar: btnAction('Registrar') || (isEdit ? 'editar_actividad.php' : 'registrar_actividad.php'),
+        Borrar: btnAction('Borrar')
+    };
+
+    const matricula = fieldValue('matricula');
+    const periodo = fieldValue('id_periodo');
+    const periodoDisplay = /^\d{4}$/.test(periodo) ? `${periodo}-${+periodo + 1}` : periodo;
+
+    // En edición usa la fecha guardada de la actividad; si no, la más reciente / la recordada
+    let defaultDate = existing.cuando || getMostRecentActivityDate() || getLastActivityDate() || '';
 
     const timeOptions = Array.from({length: 24}, (_, i) => {
         const h = (i + 1) * 0.5;
         const hrs = Math.floor(h);
         const min = (h % 1) * 60;
-        return `<option value="${h.toFixed(2)}">${hrs.toString().padStart(2, '0')}:${min.toString().padStart(2, '0')} hrs</option>`;
+        const val = h.toFixed(2);
+        return `<option value="${val}"${val === existing.horas_realizadas ? ' selected' : ''}>${hrs.toString().padStart(2, '0')}:${min.toString().padStart(2, '0')} hrs</option>`;
     }).join('');
 
-    const selectOptions = (items) => items.map(item => `<option value="${item}">${item}</option>`).join('');
+    const selectOptions = (items, selected) => items.map(item => `<option value="${item}"${item === selected ? ' selected' : ''}>${item}</option>`).join('');
 
     form.innerHTML = `
         <div class="modern-form-container">
@@ -387,6 +422,7 @@ const modernizeForm = () => {
             </div>
             <div class="modern-form-content">
                 <form method="${origForm.method || 'post'}" action="${origForm.action || ''}" id="modernForm">
+                    ${isEdit ? `<input type="hidden" name="id_actividad" value="${idActividad}">` : ''}
                     <div class="modern-info-row">
                         <div class="modern-info-item"><span class="modern-info-label">Matrícula</span><span class="modern-info-value">${matricula}</span><input type="hidden" name="matricula" value="${matricula}"></div>
                         <div class="modern-info-item"><span class="modern-info-label">Periodo</span><span class="modern-info-value">${periodoDisplay}</span><input type="hidden" name="id_periodo" value="${periodo}"></div>
@@ -400,10 +436,10 @@ const modernizeForm = () => {
                             </small>
                         </div>
                         <div class="modern-form-group"><label class="modern-form-label required">Tiempo invertido</label><select name="horas_realizadas" class="modern-select" required><option value="">Seleccionar...</option>${timeOptions}</select></div>
-                        <div class="modern-form-group"><label class="modern-form-label required">¿Qué tipo de actividad?</label><select name="tipo" class="modern-select" required><option value="">Seleccionar...</option>${selectOptions(['Cobertura de evento local','Cobertura de evento nacional','Contenido para Instagram / Facebook','Contenido para Tik Tok','Contenido para Proyecto Especial','Diseño gráfico','Edición de video','Grabación de video','Nota para CONECTA','Sesión de fotos','Actividades de oficina','Bootcamp','Junta','Otro'])}</select></div>
-                        <div class="modern-form-group"><label class="modern-form-label required">Módulo de Aprendizaje</label><select name="modulo_aprendizaje" class="modern-select" required><option value="">Seleccionar...</option>${selectOptions(['Producción audiovisual','Comunicación oral','Redacción','Narrativa visual','Cobertura de eventos'])}</select></div>
-                        <div class="modern-form-group"><label class="modern-form-label required">Categoría</label><select name="categoria" class="modern-select" required><option value="">Seleccionar...</option>${selectOptions(['Academia / Profesores','Arte y Cultura','Deportes','Vida estudiantil','Eventos institucionales','Proyecto nacional','Proyecto laboral (exclusivo UN)','Otro'])}</select></div>
-                        <div class="modern-form-group"><label class="modern-form-label required">Ubicación</label><select name="ubicacion_evento" class="modern-select" required><option value="">Seleccionar...</option><option value="Campus">Campus</option><option value="Casa">Casa</option><option value="Otro">Otro</option></select></div>
+                        <div class="modern-form-group"><label class="modern-form-label required">¿Qué tipo de actividad?</label><select name="tipo" class="modern-select" required><option value="">Seleccionar...</option>${selectOptions(['Cobertura de evento local','Cobertura de evento nacional','Contenido para Instagram / Facebook','Contenido para Tik Tok','Contenido para Proyecto Especial','Diseño gráfico','Edición de video','Grabación de video','Nota para CONECTA','Sesión de fotos','Actividades de oficina','Bootcamp','Junta','Otro'], existing.tipo)}</select></div>
+                        <div class="modern-form-group"><label class="modern-form-label required">Módulo de Aprendizaje</label><select name="modulo_aprendizaje" class="modern-select" required><option value="">Seleccionar...</option>${selectOptions(['Producción audiovisual','Comunicación oral','Redacción','Narrativa visual','Cobertura de eventos'], existing.modulo_aprendizaje)}</select></div>
+                        <div class="modern-form-group"><label class="modern-form-label required">Categoría</label><select name="categoria" class="modern-select" required><option value="">Seleccionar...</option>${selectOptions(['Academia / Profesores','Arte y Cultura','Deportes','Vida estudiantil','Eventos institucionales','Proyecto nacional','Proyecto laboral (exclusivo UN)','Otro'], existing.categoria)}</select></div>
+                        <div class="modern-form-group"><label class="modern-form-label required">Ubicación</label><select name="ubicacion_evento" class="modern-select" required><option value="">Seleccionar...</option>${selectOptions(['Campus','Casa','Otro'], existing.ubicacion_evento)}</select></div>
                         <div class="modern-form-group full-width"><label class="modern-form-label required">Nombre del evento</label><input type="text" name="nombre_evento" class="modern-input" required></div>
                         <div class="modern-form-group full-width"><label class="modern-form-label required">Descripción del evento</label><textarea name="descripcion" class="modern-textarea" rows="5" required></textarea></div>
                         <div class="modern-form-group full-width">
@@ -417,14 +453,15 @@ const modernizeForm = () => {
                     </div>
                     <div class="modern-form-actions">
                         <button type="submit" name="Borrador" class="modern-form-btn modern-form-btn-secondary">${svg('register')}Guardar Borrador</button>
-                        <button type="submit" name="Registrar" class="modern-form-btn modern-form-btn-primary">${svg('register')}Registrar Actividad</button>
+                        <button type="submit" name="Registrar" class="modern-form-btn modern-form-btn-primary">${svg('register')}${isEdit ? 'Actualizar Actividad' : 'Registrar Actividad'}</button>
+                        ${actions.Borrar ? `<button type="submit" name="Borrar" class="modern-form-btn" style="background:linear-gradient(135deg,#dc2626 0%,#b91c1c 100%);color:#fff">${svg('register')}Borrar</button>` : ''}
                     </div>
                 </form>
             </div>
         </div>`;
 
-    // Mostrar indicador si se está usando una fecha guardada
-    if (defaultDate) {
+    // Mostrar indicador si se está usando una fecha guardada (no aplica al editar)
+    if (defaultDate && !isEdit) {
         const indicator = $('#dateMemoryIndicator');
         if (indicator) {
             indicator.style.display = 'block';
@@ -439,6 +476,17 @@ const modernizeForm = () => {
     const dateInput = $('#activityDateInput');
 
     if (newForm) {
+        // Rellenar los campos de texto libre con los valores existentes (modo edición).
+        // Se asignan por propiedad para no romper el HTML ni arriesgar inyección.
+        ['nombre_evento', 'evidencia_1', 'evidencia_2', 'evidencia_3'].forEach(name => {
+            const field = newForm.querySelector(`[name="${name}"]`);
+            if (field) field.value = existing[name];
+        });
+        const descripcionField = newForm.querySelector('textarea[name="descripcion"]');
+        if (descripcionField) descripcionField.value = existing.descripcion;
+        const pubRadio = newForm.querySelector(`input[name="publicacion_tec"][value="${existing.publicacion_tec}"]`);
+        if (pubRadio) pubRadio.checked = true;
+
         // Guardar la fecha cuando cambie
         if (dateInput) {
             dateInput.addEventListener('change', function() {
@@ -447,6 +495,27 @@ const modernizeForm = () => {
                 }
             });
         }
+
+        const validate = () => {
+            let valid = true;
+            newForm.querySelectorAll('.error-message').forEach(msg => msg.remove());
+            newForm.querySelectorAll('[required]').forEach(field => {
+                if (!field.value.trim()) {
+                    valid = false;
+                    field.style.borderColor = '#ef4444';
+                    const error = document.createElement('span');
+                    error.className = 'error-message';
+                    error.textContent = 'Este campo es requerido';
+                    field.parentNode.appendChild(error);
+                } else {
+                    field.style.borderColor = '#d1d5db';
+                }
+            });
+            if (!valid) {
+                newForm.querySelector('[required]:invalid, [required][style*="border-color: rgb(239, 68, 68)"]')?.scrollIntoView({behavior: 'smooth', block: 'center'});
+            }
+            return valid;
+        };
 
         const submitForm = (action, name) => {
             // Guardar la fecha antes de enviar el formulario
@@ -463,36 +532,21 @@ const modernizeForm = () => {
 
         newForm.querySelector('button[name="Borrador"]')?.addEventListener('click', e => {
             e.preventDefault();
-            submitForm('registrar_borrador.php', 'Borrador');
+            submitForm(actions.Borrador, 'Borrador');
         });
 
         newForm.querySelector('button[name="Registrar"]')?.addEventListener('click', e => {
             e.preventDefault();
-            submitForm('registrar_actividad.php', 'Registrar');
+            if (validate()) submitForm(actions.Registrar, 'Registrar');
+        });
+
+        newForm.querySelector('button[name="Borrar"]')?.addEventListener('click', e => {
+            e.preventDefault();
+            if (confirm('¿Estás seguro de que deseas borrar esta actividad?')) submitForm(actions.Borrar, 'Borrar');
         });
 
         newForm.addEventListener('submit', e => {
-            const required = newForm.querySelectorAll('[required]');
-            let valid = true;
-            newForm.querySelectorAll('.error-message').forEach(msg => msg.remove());
-
-            required.forEach(field => {
-                if (!field.value.trim()) {
-                    valid = false;
-                    field.style.borderColor = '#ef4444';
-                    const error = document.createElement('span');
-                    error.className = 'error-message';
-                    error.textContent = 'Este campo es requerido';
-                    field.parentNode.appendChild(error);
-                } else {
-                    field.style.borderColor = '#d1d5db';
-                }
-            });
-
-            if (!valid) {
-                e.preventDefault();
-                newForm.querySelector('[required]:invalid, [required][style*="border-color: rgb(239, 68, 68)"]')?.scrollIntoView({behavior: 'smooth', block: 'center'});
-            }
+            if (!validate()) e.preventDefault();
         });
 
         newForm.querySelectorAll('input, select, textarea').forEach(field => {
