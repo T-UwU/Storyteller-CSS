@@ -386,6 +386,15 @@ const modernizeForm = () => {
         evidencia_3: fieldValue('evidencia_3')
     };
 
+    // Errores de validación que el servidor devuelve junto a cada campo
+    // (<font color="red"><b>mensaje</b></font> dentro de la misma celda)
+    const errors = {};
+    Object.keys(existing).forEach(name => {
+        const msg = origForm.querySelector(`[name="${name}"]`)
+            ?.closest('td')?.querySelector('font[color="red"] b')?.textContent.trim();
+        if (msg) errors[name] = msg;
+    });
+
     // Acciones reales tomadas de los botones originales (registrar_* o editar_*)
     const btnAction = btnName => origForm.querySelector(`input[name="${btnName}"]`)
         ?.getAttribute('onclick')?.match(/this\.form\.action\s*=\s*['"]([^'"]+)['"]/)?.[1];
@@ -486,6 +495,23 @@ const modernizeForm = () => {
         if (descripcionField) descripcionField.value = existing.descripcion;
         const pubRadio = newForm.querySelector(`input[name="publicacion_tec"][value="${existing.publicacion_tec}"]`);
         if (pubRadio) pubRadio.checked = true;
+
+        // Mostrar los errores de validación devueltos por el servidor
+        let firstErrorField = null;
+        Object.entries(errors).forEach(([name, msg]) => {
+            const field = newForm.querySelector(`[name="${name}"]`);
+            if (!field) return;
+            field.style.borderColor = '#ef4444';
+            const group = field.closest('.modern-form-group') || field.parentNode;
+            if (!group.querySelector('.error-message')) {
+                const error = document.createElement('span');
+                error.className = 'error-message';
+                error.textContent = msg;
+                group.appendChild(error);
+            }
+            if (!firstErrorField) firstErrorField = field;
+        });
+        if (firstErrorField) firstErrorField.scrollIntoView({behavior: 'smooth', block: 'center'});
 
         // Guardar la fecha cuando cambie
         if (dateInput) {
