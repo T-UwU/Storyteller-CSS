@@ -19,7 +19,7 @@
 const cfg = {
     css: 'https://raw.githubusercontent.com/T-UwU/Storyteller-CSS/refs/heads/main/storyteller.css',
     cssLider: 'https://raw.githubusercontent.com/T-UwU/Storyteller-CSS/refs/heads/main/storyteller-lider.css',
-    fallback: `.tm-ctrl{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;margin:16px 0;display:flex;gap:12px}.header{display:none!important}.modern-header{background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:0;z-index:50}.modern-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;margin:20px auto;max-width:1200px}.modern-table{width:100%;border-collapse:collapse}.tm-dark-toggle{padding:.5rem}html.tm-dark body{background:#0f172a}html.tm-dark .modern-header,html.tm-dark .modern-card,html.tm-dark .modern-form-container{background:#1e293b;border-color:#334155}html.tm-dark .modern-title,html.tm-dark .modern-td,html.tm-dark .modern-info-value{color:#e2e8f0}html.tm-dark .modern-th{background:#273449;color:#94a3b8}html.tm-dark .modern-nav-item{color:#cbd5e1}html.tm-dark .modern-input,html.tm-dark .modern-select,html.tm-dark .modern-textarea,html.tm-dark .tm-ctrl select,html.tm-dark .tm-ctrl input[type=date]{background:#0f172a;border-color:#334155;color:#e2e8f0}`,
+    fallback: `.tm-ctrl{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;margin:16px 0;display:flex;gap:12px}.header{display:none!important}.modern-header{background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:0;z-index:50}.modern-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;margin:20px auto;max-width:1200px}.modern-table{width:100%;border-collapse:collapse}.tm-dark-toggle{padding:.5rem}html.tm-dark body{background:#0f172a}html.tm-dark .modern-header,html.tm-dark .modern-card,html.tm-dark .modern-form-container{background:#1e293b;border-color:#334155}html.tm-dark .modern-title,html.tm-dark .modern-td,html.tm-dark .modern-info-value{color:#e2e8f0}html.tm-dark .modern-th{background:#273449;color:#94a3b8}html.tm-dark .modern-nav-item{color:#cbd5e1}html.tm-dark .modern-input,html.tm-dark .modern-select,html.tm-dark .modern-textarea,html.tm-dark .tm-ctrl select,html.tm-dark .tm-ctrl input[type=date]{background:#0f172a;border-color:#334155;color:#e2e8f0}.tm-clone-banner{background:#fef3c7;border:1px solid #fcd34d;color:#92400e;border-radius:10px;padding:12px 16px;margin-bottom:20px;font-size:14px;line-height:1.4}html.tm-dark .tm-clone-banner{background:#422006;border-color:#854d0e;color:#fcd34d}`,
     liderFallback: `.header{display:none!important}body.bg-amarillo,body.bg-verde{background:#f8fafc}.modern-header{background:#fff;border-bottom:1px solid #e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,.1);position:sticky;top:0;z-index:50}.modern-header-container{max-width:1200px;margin:0 auto;display:flex;height:4rem;align-items:center;justify-content:space-between;padding:0 1rem}.modern-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 4px 6px -1px rgba(0,0,0,.1);margin:20px auto;max-width:1200px}.modern-card-header{padding:24px 24px 16px;border-bottom:1px solid #f3f4f6}.modern-title{font-size:24px;font-weight:600;color:#111827;margin:0}.modern-card-content{padding:24px}.modern-table{width:100%;border-collapse:collapse;font-size:14px}.modern-th{padding:14px 10px;text-align:center;font-weight:600;color:#374151;font-size:12px;text-transform:uppercase;background:#f9fafb}.modern-td{padding:14px 10px;text-align:center;color:#374151}.modern-row{border-bottom:1px solid #f3f4f6}.modern-row:hover{background:#f9fafb}.modern-badge{display:inline-flex;align-items:center;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:600;color:#fff;text-decoration:none}.modern-badge-primary{background:#3b82f6}.modern-badge-success{background:#10b981}.modern-badge-warning{background:#f59e0b}.modern-badge-default{background:#6b7280}.lider-campus-section{margin-bottom:28px}.lider-campus-title{font-size:16px;color:#111827;margin:0 0 10px}.lider-campus-label{color:#3b82f6;font-weight:700}.lider-activity{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.lider-activity-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:12px 0}.lider-grade-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-top:8px}.lider-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.modern-form-btn{padding:10px 18px;border:none;border-radius:8px;color:#fff;font-weight:600;cursor:pointer;display:inline-flex;gap:6px;align-items:center}.lider-btn-ok{background:#10b981}.lider-btn-no{background:#f59e0b}.lider-btn-del{background:#dc2626}.tm-dark-toggle{padding:.5rem}.tm-count{font-size:13px;color:#6b7280;background:#f3f4f6;padding:6px 12px;border-radius:20px}.lider-summary{margin-bottom:16px}.lider-summary-label{display:block;font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;margin-bottom:8px}.lider-chips{display:flex;flex-wrap:wrap;gap:8px}.lider-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid #e2e8f0;border-radius:20px;background:#fff;color:#374151;font-size:13px;cursor:pointer}.lider-chip.active{background:#3b82f6;border-color:#3b82f6;color:#fff}.lider-chip-count{min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;background:#f59e0b;color:#fff;font-size:11px;font-weight:700}.tm-ctrl{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:12px;padding:12px 16px;margin-bottom:16px}.tm-search{position:relative;display:flex;align-items:center;flex:1 1 220px}.tm-search svg{position:absolute;left:10px;width:16px;height:16px;color:#9ca3af}.tm-ctrl .tm-search input{width:100%;padding:9px 12px 9px 36px}.tm-ctrl input,.tm-ctrl select{font-size:13px;border:1px solid #d1d5db;border-radius:8px;background:#fff;padding:9px 12px}.tm-ctrl select{min-width:160px}.tm-btn{padding:9px 16px;border:none;border-radius:8px;color:#fff;font-weight:600;cursor:pointer}.tm-btn-s{background:#4b5563}html.tm-dark body,html.tm-dark body.bg-amarillo,html.tm-dark body.bg-verde{background:#0f172a}html.tm-dark .modern-header,html.tm-dark .modern-card,html.tm-dark .lider-activity{background:#1e293b;border-color:#334155}html.tm-dark .modern-title,html.tm-dark .lider-value,html.tm-dark .modern-td,html.tm-dark .lider-activity-title{color:#e2e8f0}html.tm-dark .modern-th{background:#273449;color:#94a3b8}html.tm-dark .modern-nav-item{color:#cbd5e1}html.tm-dark .modern-select,html.tm-dark .modern-textarea,html.tm-dark .tm-ctrl input,html.tm-dark .tm-ctrl select{background:#0f172a;border-color:#334155;color:#e2e8f0}html.tm-dark .tm-count,html.tm-dark .lider-chip{background:#273449;border-color:#334155;color:#cbd5e1}.alumno-dropdown{min-width:18rem;padding:.5rem;background:#fff;border:1px solid #e5e7eb;border-radius:.375rem;box-shadow:0 10px 15px -3px rgba(0,0,0,.1)}.alumno-search-wrap{position:relative;display:flex;align-items:center;margin-bottom:.5rem}.alumno-search-wrap svg{position:absolute;left:.6rem;width:16px;height:16px;color:#9ca3af}.alumno-search{width:100%;padding:.5rem .6rem .5rem 2rem;border:1px solid #e5e7eb;border-radius:.375rem;font-size:.875rem;outline:none}.alumno-list{max-height:18rem;overflow-y:auto}.alumno-campus-head{padding:.4rem .5rem .25rem;font-size:.7rem;font-weight:700;text-transform:uppercase;color:#9ca3af}.alumno-item{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.55rem .6rem;border-radius:.375rem;text-decoration:none}.alumno-item:hover{background:#eef2ff}.alumno-name{font-size:.875rem;color:#1f2937;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.alumno-right{display:flex;align-items:center;gap:.4rem;flex-shrink:0}.alumno-mat{font-size:.7rem;font-weight:600;color:#4f46e5;background:#eef2ff;padding:.15rem .4rem;border-radius:.25rem}.alumno-count{min-width:1.25rem;height:1.25rem;display:inline-flex;align-items:center;justify-content:center;padding:0 .3rem;border-radius:.625rem;background:#f59e0b;color:#fff;font-size:.7rem;font-weight:700}html.tm-dark .alumno-dropdown{background:#1e293b;border-color:#334155}html.tm-dark .alumno-search{background:#0f172a;border-color:#334155;color:#e2e8f0}html.tm-dark .alumno-name{color:#e2e8f0}html.tm-dark .alumno-item:hover{background:#334155}html.tm-dark .alumno-mat{color:#c7d2fe;background:#312e81}`,
     months: {ENE:0,FEB:1,MAR:2,ABR:3,MAY:4,JUN:5,JUL:6,AGO:7,SEP:8,OCT:9,NOV:10,DIC:11},
     pages: ['ver_actividades.php', 'ver_pendientes.php', 'ver_validadas.php']
@@ -529,6 +529,93 @@ const modernizeContent = () => {
     }
 };
 
+// ==================== EDITAR ACTIVIDAD (clonar + borrar) ====================
+// El portal no permite editar una actividad "POR REVISAR" (solo borradores via
+// formulario_editar.php). Solución: leer los datos de ver_actividad.php, crear una
+// actividad nueva en formulario_actividad.php con esos datos y borrar la original.
+
+const SPANISH_MONTHS = {enero:1, febrero:2, marzo:3, abril:4, mayo:5, junio:6, julio:7, agosto:8, septiembre:9, setiembre:9, octubre:10, noviembre:11, diciembre:12};
+
+// "22 de junio de 2026" -> "2026-06-22"
+const parseSpanishDate = txt => {
+    const m = (txt || '').toLowerCase().match(/(\d{1,2})\s+de\s+([a-záéíóú]+)\s+de\s+(\d{4})/);
+    if (!m) return '';
+    const mes = SPANISH_MONTHS[m[2]];
+    if (!mes) return '';
+    return `${m[3]}-${String(mes).padStart(2, '0')}-${m[1].padStart(2, '0')}`;
+};
+
+// Lee los campos de la tabla de ver_actividad.php (ya modernizada) por etiqueta
+const scrapeActivityDetail = () => {
+    const fields = {};
+    let evid = 0;
+    $$('main.content .modern-table tr').forEach(tr => {
+        const cells = tr.cells;
+        if (!cells || cells.length < 2) return;
+        const label = (cells[0].textContent || '').toLowerCase().trim();
+        const valCell = cells[1];
+        const text = (valCell.textContent || '').trim();
+        if (label.includes('fecha de la actividad')) fields.cuando = parseSpanishDate(text);
+        else if (label.includes('tipo de actividad')) fields.tipo = text;
+        else if (label.includes('módulo') || label.includes('modulo')) fields.modulo_aprendizaje = text;
+        else if (label.includes('categoría') || label.includes('categoria')) fields.categoria = text;
+        else if (label.includes('nombre del evento')) fields.nombre_evento = text;
+        else if (label.includes('descripción') || label.includes('descripcion')) fields.descripcion = text;
+        else if (label.includes('ubicación') || label.includes('ubicacion')) fields.ubicacion_evento = text;
+        else if (label.includes('tiempo invertido')) { const n = parseFloat(text); if (!isNaN(n)) fields.horas_realizadas = n.toFixed(2); }
+        else if (label.includes('publicó') || label.includes('publico')) fields.publicacion_tec = /^s/i.test(text) ? '1' : '0';
+        else if (label.includes('evidencia')) {
+            evid++;
+            const a = valCell.querySelector('a');
+            fields['evidencia_' + evid] = (a ? (a.textContent.trim() || a.getAttribute('href') || '') : text).trim();
+        }
+    });
+    return fields;
+};
+
+// Agrega el botón "Editar" en ver_actividad.php (solo si aún es borrable / POR REVISAR)
+const addEditToActivityDetail = () => {
+    if (!location.pathname.includes('ver_actividad.php')) return;
+    const borrar = $('main.content input[name="Borrar"]');
+    if (!borrar || $('#tmEditActivity')) return;
+
+    const titleTxt = $('main.content .modern-title')?.textContent || '';
+    const oldId = titleTxt.match(/\((\d+)\)/)?.[1];
+    if (!oldId) return;
+
+    // URL de borrado: del onclick original (antes de que fixButtons lo limpie) o reconstruida
+    const onclick = borrar.getAttribute('onclick') || '';
+    const deleteUrl = onclick.match(/this\.form\.action\s*=\s*['"]([^'"]+)['"]/)?.[1]
+        || `eliminar_actividad.php?id_actividad=${oldId}`;
+
+    const btn = document.createElement('button');
+    btn.id = 'tmEditActivity';
+    btn.type = 'button';
+    btn.className = 'modern-form-btn modern-form-btn-primary';
+    btn.style.marginRight = '10px';
+    btn.innerHTML = `${svg('register')}Editar`;
+    btn.onclick = () => {
+        const fields = scrapeActivityDetail();
+        saveValue('editClone', {oldId, deleteUrl, fields, ts: Date.now()});
+        window.location.href = 'formulario_actividad.php';
+    };
+    borrar.parentNode.insertBefore(btn, borrar);
+};
+
+// Tras crear la copia, ofrece borrar la original (en una página que NO sea el formulario)
+const processPendingDelete = () => {
+    const pd = getValue('pendingDelete', null);
+    if (!pd) return;
+    // No borrar si seguimos en un formulario (p. ej. el alta rebotó con errores de validación)
+    if ($('main.content_agregar')) return;
+    // Expira a los 15 min por seguridad
+    if (!pd.ts || Date.now() - pd.ts > 15 * 60 * 1000) { saveValue('pendingDelete', null); return; }
+    saveValue('pendingDelete', null); // consumir antes de navegar (evita repetir)
+    if (confirm(`Se creó la actividad corregida. ¿Borrar ahora la actividad original (#${pd.oldId})?`)) {
+        window.location.href = pd.deleteUrl;
+    }
+};
+
 const modernizeForm = () => {
     const form = $('main.content_agregar');
     if (!form || form.classList.contains('modernized')) return;
@@ -676,6 +763,39 @@ const modernizeForm = () => {
         const pubRadio = newForm.querySelector(`input[name="publicacion_tec"][value="${existing.publicacion_tec}"]`);
         if (pubRadio) pubRadio.checked = true;
 
+        // ===== Modo "clonar" (editar una actividad por revisar) =====
+        // Si venimos de "Editar" en ver_actividad.php, precargamos los datos de la
+        // actividad original. Al registrar se crea una nueva y se borra la vieja.
+        let cloneInfo = null;
+        const clone = !isEdit ? getValue('editClone', null) : null;
+        if (clone && clone.ts && Date.now() - clone.ts < 15 * 60 * 1000) {
+            cloneInfo = {oldId: clone.oldId, deleteUrl: clone.deleteUrl};
+            saveValue('editClone', null); // consumir una sola vez
+            const f = clone.fields || {};
+            const setVal = (name, val) => {
+                if (val == null) return;
+                const el = newForm.querySelector(`[name="${name}"]`);
+                if (el) el.value = val;
+            };
+            ['cuando', 'horas_realizadas', 'tipo', 'modulo_aprendizaje', 'categoria',
+             'ubicacion_evento', 'nombre_evento', 'evidencia_1', 'evidencia_2', 'evidencia_3']
+                .forEach(name => setVal(name, f[name]));
+            const desc = newForm.querySelector('textarea[name="descripcion"]');
+            if (desc) desc.value = f.descripcion || '';
+            const pr = newForm.querySelector(`input[name="publicacion_tec"][value="${f.publicacion_tec || '0'}"]`);
+            if (pr) pr.checked = true;
+
+            // Aviso visible de que estamos editando (clonando + borrando)
+            const banner = document.createElement('div');
+            banner.className = 'tm-clone-banner';
+            banner.textContent = `Editando la actividad original #${clone.oldId}: al guardar se creará la versión corregida y luego se te pedirá borrar la original.`;
+            newForm.insertBefore(banner, newForm.firstChild);
+
+            // El botón principal cambia de texto para dejar claro el flujo
+            const regBtn = newForm.querySelector('button[name="Registrar"]');
+            if (regBtn) regBtn.innerHTML = `${svg('register')}Guardar cambios y borrar original`;
+        }
+
         // Mostrar los errores de validación devueltos por el servidor
         let firstErrorField = null;
         Object.entries(errors).forEach(([name, msg]) => {
@@ -743,7 +863,10 @@ const modernizeForm = () => {
 
         newForm.querySelector('button[name="Registrar"]')?.addEventListener('click', e => {
             e.preventDefault();
-            if (validate()) submitForm(actions.Registrar, 'Registrar');
+            if (!validate()) return;
+            // En modo clonar: marca la original para borrarla tras crear la copia
+            if (cloneInfo) saveValue('pendingDelete', {oldId: cloneInfo.oldId, deleteUrl: cloneInfo.deleteUrl, ts: Date.now()});
+            submitForm(actions.Registrar, 'Registrar');
         });
 
         newForm.querySelector('button[name="Borrar"]')?.addEventListener('click', e => {
@@ -1354,7 +1477,9 @@ const init = () => {
     if (isLider) {
         initLider();
     } else {
+        processPendingDelete();
         modernizeContent();
+        addEditToActivityDetail();
         modernizeForm();
         initTable();
     }
