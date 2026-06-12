@@ -14,10 +14,14 @@ Un proyecto que agrupa un **Userscript** y sus **hojas de estilo CSS** para opti
 
 **Como líder:**
 - Lista de alumnos disponibles agrupada por campus.
+- Menú **"Por Alumno"** en el header: selector desplegable con buscador para saltar directamente a la página de calificación de cualquier alumno, mostrando junto a cada uno su número de actividades **por revisar**.
 - Página de calificación rediseñada como tarjetas, con su formulario reconstruido (Validar / Rechazar / Eliminar funcionan correctamente).
 - Vistas de pendientes, validadas y todas las actividades modernizadas.
+- **Búsqueda y filtros** en la vista de pendientes (por alumno, tipo y módulo) con contador de resultados y resumen de **"por revisar por alumno"** mediante chips.
 
-En ambos roles se aplica un diseño más amigable y compacto.
+**En ambos roles:**
+- **Modo oscuro** con interruptor en el header, recordado entre sesiones.
+- Diseño más amigable y compacto.
 
 ---
 
@@ -131,6 +135,18 @@ https://github.com/user-attachments/assets/98c1f71d-5465-4706-ac18-45c105160b26
    * Componentes con bordes redondeados y sombras suaves.
    * Clases personalizadas (`.tm-ctrl`, `.modern-*`, etc.) para separar lógica/estilos.
    * Paleta de colores neutros y tipografía legible que reduce la fatiga visual.
+
+8. **Modo Oscuro (alumno y líder)**
+
+   * Interruptor (sol/luna) en el header para alternar entre tema claro y oscuro.
+   * La preferencia se guarda y se reaplica automáticamente en cada carga.
+
+9. **Vista de Líder**
+
+   * Detección automática del rol por la URL (`/lider/`) con su propio CSS (`storyteller-lider.css`).
+   * Lista de alumnos agrupada por campus y página de calificación en tarjetas con formulario funcional (Validar / Rechazar / Eliminar).
+   * Menú **"Por Alumno"** desplegable con buscador y contador de actividades por revisar de cada alumno.
+   * Búsqueda y filtros (alumno / tipo / módulo) en la vista de pendientes, con contador de resultados y resumen "por revisar por alumno".
 
 ---
 
