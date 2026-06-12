@@ -180,15 +180,17 @@ const getMostRecentActivityDate = () => {
 };
 
 // ==================== CSS Y HEADER ====================
-const loadCSS = async () => {
-    const url = isLider ? cfg.cssLider : cfg.css;
-    const fb = isLider ? cfg.liderFallback : cfg.fallback;
-    try {
-        const res = await fetch(url);
-        return res.ok ? await res.text() : fb;
-    } catch {
-        return fb;
+const CSS_CACHE_KEY = isLider ? 'cssCache_lider' : 'cssCache_alumno';
+
+// Inyecta (o reemplaza) el <style> del script
+const injectCSS = css => {
+    let style = document.getElementById('tmStyle');
+    if (!style) {
+        style = document.createElement('style');
+        style.id = 'tmStyle';
+        (document.head || document.documentElement).appendChild(style);
     }
+    style.textContent = css;
 };
 
 const getUserInfo = () => {
@@ -592,14 +594,19 @@ const addEditToActivityDetail = () => {
     btn.id = 'tmEditActivity';
     btn.type = 'button';
     btn.className = 'modern-form-btn modern-form-btn-primary';
-    btn.style.marginRight = '10px';
     btn.innerHTML = `${svg('register')}Editar`;
     btn.onclick = () => {
         const fields = scrapeActivityDetail();
         saveValue('editClone', {oldId, deleteUrl, fields, ts: Date.now()});
         window.location.href = 'formulario_actividad.php';
     };
-    borrar.parentNode.insertBefore(btn, borrar);
+    // Los .modern-form-btn son display:flex (bloque): para que Editar y Borrar
+    // queden lado a lado y centrados, los envuelvo en una fila flex.
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;gap:10px;justify-content:center;flex-wrap:wrap';
+    borrar.parentNode.insertBefore(row, borrar);
+    row.appendChild(btn);
+    row.appendChild(borrar);
 };
 
 // Tras crear la copia, ofrece borrar la original (en una página que NO sea el formulario)
@@ -1491,10 +1498,12 @@ const app = async () => {
     if (initialized) return;
     initialized = true;
 
-    const css = await loadCSS();
-    const style = document.createElement('style');
-    style.textContent = css;
-    document.head.appendChild(style);
+    const fb = isLider ? cfg.liderFallback : cfg.fallback;
+    const cached = getValue(CSS_CACHE_KEY, null);
+
+    // 1) Inyecta al instante el CSS cacheado (o el de respaldo) sin esperar a la red:
+    //    así no hay parpadeo de ~1s al cambiar de página.
+    injectCSS(cached || fb);
 
     // Aplicar preferencia de modo oscuro guardada
     applyDark(getValue('darkMode', false));
@@ -1504,6 +1513,18 @@ const app = async () => {
     } else {
         init();
     }
+
+    // 2) En segundo plano refresca el CSS desde el repo y actualiza la cache.
+    try {
+        const res = await fetch(isLider ? cfg.cssLider : cfg.css);
+        if (res.ok) {
+            const fresh = await res.text();
+            if (fresh && fresh !== cached) {
+                injectCSS(fresh);
+                saveValue(CSS_CACHE_KEY, fresh);
+            }
+        }
+    } catch { /* sin red: se queda con la cache/respaldo */ }
 };
 
 new MutationObserver(debounce(init, 100)).observe(document.body, {childList: true, subtree: true});
