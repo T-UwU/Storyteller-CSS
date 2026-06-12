@@ -188,6 +188,96 @@ body.bg-verde {
     margin: .25rem 0;
 }
 
+/* ---- Menú "Por Alumno" ---- */
+.alumno-dropdown {
+    min-width: 18rem;
+    padding: .5rem;
+}
+
+.alumno-search-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: .5rem;
+}
+
+.alumno-search-wrap svg {
+    position: absolute;
+    left: .6rem;
+    width: 16px;
+    height: 16px;
+    color: #9ca3af;
+    pointer-events: none;
+}
+
+.alumno-search {
+    width: 100%;
+    padding: .5rem .6rem .5rem 2rem;
+    border: 1px solid #e5e7eb;
+    border-radius: .375rem;
+    font-size: .875rem;
+    outline: none;
+}
+
+.alumno-search:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, .15);
+}
+
+.alumno-list {
+    max-height: 18rem;
+    overflow-y: auto;
+}
+
+.alumno-campus-head {
+    padding: .4rem .5rem .25rem;
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    color: #9ca3af;
+}
+
+.alumno-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    padding: .55rem .6rem;
+    border-radius: .375rem;
+}
+
+.alumno-item:hover {
+    background: #eef2ff;
+}
+
+.alumno-name {
+    font-size: .875rem;
+    color: #1f2937;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.alumno-mat {
+    flex-shrink: 0;
+    font-size: .7rem;
+    font-weight: 600;
+    color: #4f46e5;
+    background: #eef2ff;
+    padding: .15rem .4rem;
+    border-radius: .25rem;
+}
+
+.alumno-item:hover .alumno-mat {
+    background: #fff;
+}
+
+.alumno-empty {
+    color: #6b7280;
+    font-style: italic;
+}
+
 .user-info {
     padding: .75rem .5rem;
 }
@@ -735,6 +825,37 @@ html.tm-dark .dropdown-item:hover {
 
 html.tm-dark .dropdown-divider {
     background: #334155;
+}
+
+html.tm-dark .alumno-search {
+    background: #0f172a;
+    border-color: #334155;
+    color: #e2e8f0;
+}
+
+html.tm-dark .alumno-search:focus {
+    border-color: #6366f1;
+}
+
+html.tm-dark .alumno-campus-head {
+    color: #64748b;
+}
+
+html.tm-dark .alumno-item:hover {
+    background: #334155;
+}
+
+html.tm-dark .alumno-name {
+    color: #e2e8f0;
+}
+
+html.tm-dark .alumno-mat {
+    color: #c7d2fe;
+    background: #312e81;
+}
+
+html.tm-dark .alumno-item:hover .alumno-mat {
+    background: #1e293b;
 }
 
 html.tm-dark .user-name {

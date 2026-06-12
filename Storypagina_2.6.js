@@ -20,7 +20,7 @@ const cfg = {
     css: 'https://raw.githubusercontent.com/T-UwU/Storyteller-CSS/refs/heads/main/storyteller.css',
     cssLider: 'https://raw.githubusercontent.com/T-UwU/Storyteller-CSS/refs/heads/main/storyteller-lider.css',
     fallback: `.tm-ctrl{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;margin:16px 0;display:flex;gap:12px}.header{display:none!important}.modern-header{background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:0;z-index:50}.modern-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;margin:20px auto;max-width:1200px}.modern-table{width:100%;border-collapse:collapse}.tm-dark-toggle{padding:.5rem}html.tm-dark body{background:#0f172a}html.tm-dark .modern-header,html.tm-dark .modern-card,html.tm-dark .modern-form-container{background:#1e293b;border-color:#334155}html.tm-dark .modern-title,html.tm-dark .modern-td,html.tm-dark .modern-info-value{color:#e2e8f0}html.tm-dark .modern-th{background:#273449;color:#94a3b8}html.tm-dark .modern-nav-item{color:#cbd5e1}html.tm-dark .modern-input,html.tm-dark .modern-select,html.tm-dark .modern-textarea,html.tm-dark .tm-ctrl select,html.tm-dark .tm-ctrl input[type=date]{background:#0f172a;border-color:#334155;color:#e2e8f0}`,
-    liderFallback: `.header{display:none!important}body.bg-amarillo,body.bg-verde{background:#f8fafc}.modern-header{background:#fff;border-bottom:1px solid #e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,.1);position:sticky;top:0;z-index:50}.modern-header-container{max-width:1200px;margin:0 auto;display:flex;height:4rem;align-items:center;justify-content:space-between;padding:0 1rem}.modern-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 4px 6px -1px rgba(0,0,0,.1);margin:20px auto;max-width:1200px}.modern-card-header{padding:24px 24px 16px;border-bottom:1px solid #f3f4f6}.modern-title{font-size:24px;font-weight:600;color:#111827;margin:0}.modern-card-content{padding:24px}.modern-table{width:100%;border-collapse:collapse;font-size:14px}.modern-th{padding:14px 10px;text-align:center;font-weight:600;color:#374151;font-size:12px;text-transform:uppercase;background:#f9fafb}.modern-td{padding:14px 10px;text-align:center;color:#374151}.modern-row{border-bottom:1px solid #f3f4f6}.modern-row:hover{background:#f9fafb}.modern-badge{display:inline-flex;align-items:center;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:600;color:#fff;text-decoration:none}.modern-badge-primary{background:#3b82f6}.modern-badge-success{background:#10b981}.modern-badge-warning{background:#f59e0b}.modern-badge-default{background:#6b7280}.lider-campus-section{margin-bottom:28px}.lider-campus-title{font-size:16px;color:#111827;margin:0 0 10px}.lider-campus-label{color:#3b82f6;font-weight:700}.lider-activity{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.lider-activity-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:12px 0}.lider-grade-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-top:8px}.lider-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.modern-form-btn{padding:10px 18px;border:none;border-radius:8px;color:#fff;font-weight:600;cursor:pointer;display:inline-flex;gap:6px;align-items:center}.lider-btn-ok{background:#10b981}.lider-btn-no{background:#f59e0b}.lider-btn-del{background:#dc2626}.tm-dark-toggle{padding:.5rem}.tm-count{font-size:13px;color:#6b7280;background:#f3f4f6;padding:6px 12px;border-radius:20px}.lider-summary{margin-bottom:16px}.lider-summary-label{display:block;font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;margin-bottom:8px}.lider-chips{display:flex;flex-wrap:wrap;gap:8px}.lider-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid #e2e8f0;border-radius:20px;background:#fff;color:#374151;font-size:13px;cursor:pointer}.lider-chip.active{background:#3b82f6;border-color:#3b82f6;color:#fff}.lider-chip-count{min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;background:#f59e0b;color:#fff;font-size:11px;font-weight:700}.tm-ctrl{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:12px;padding:12px 16px;margin-bottom:16px}.tm-search{position:relative;display:flex;align-items:center;flex:1 1 220px}.tm-search svg{position:absolute;left:10px;width:16px;height:16px;color:#9ca3af}.tm-search input{width:100%;padding-left:34px}.tm-ctrl input,.tm-ctrl select{font-size:13px;border:1px solid #d1d5db;border-radius:8px;background:#fff;padding:9px 12px}.tm-ctrl select{min-width:160px}.tm-btn{padding:9px 16px;border:none;border-radius:8px;color:#fff;font-weight:600;cursor:pointer}.tm-btn-s{background:#4b5563}html.tm-dark body,html.tm-dark body.bg-amarillo,html.tm-dark body.bg-verde{background:#0f172a}html.tm-dark .modern-header,html.tm-dark .modern-card,html.tm-dark .lider-activity{background:#1e293b;border-color:#334155}html.tm-dark .modern-title,html.tm-dark .lider-value,html.tm-dark .modern-td,html.tm-dark .lider-activity-title{color:#e2e8f0}html.tm-dark .modern-th{background:#273449;color:#94a3b8}html.tm-dark .modern-nav-item{color:#cbd5e1}html.tm-dark .modern-select,html.tm-dark .modern-textarea,html.tm-dark .tm-ctrl input,html.tm-dark .tm-ctrl select{background:#0f172a;border-color:#334155;color:#e2e8f0}html.tm-dark .tm-count,html.tm-dark .lider-chip{background:#273449;border-color:#334155;color:#cbd5e1}`,
+    liderFallback: `.header{display:none!important}body.bg-amarillo,body.bg-verde{background:#f8fafc}.modern-header{background:#fff;border-bottom:1px solid #e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,.1);position:sticky;top:0;z-index:50}.modern-header-container{max-width:1200px;margin:0 auto;display:flex;height:4rem;align-items:center;justify-content:space-between;padding:0 1rem}.modern-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 4px 6px -1px rgba(0,0,0,.1);margin:20px auto;max-width:1200px}.modern-card-header{padding:24px 24px 16px;border-bottom:1px solid #f3f4f6}.modern-title{font-size:24px;font-weight:600;color:#111827;margin:0}.modern-card-content{padding:24px}.modern-table{width:100%;border-collapse:collapse;font-size:14px}.modern-th{padding:14px 10px;text-align:center;font-weight:600;color:#374151;font-size:12px;text-transform:uppercase;background:#f9fafb}.modern-td{padding:14px 10px;text-align:center;color:#374151}.modern-row{border-bottom:1px solid #f3f4f6}.modern-row:hover{background:#f9fafb}.modern-badge{display:inline-flex;align-items:center;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:600;color:#fff;text-decoration:none}.modern-badge-primary{background:#3b82f6}.modern-badge-success{background:#10b981}.modern-badge-warning{background:#f59e0b}.modern-badge-default{background:#6b7280}.lider-campus-section{margin-bottom:28px}.lider-campus-title{font-size:16px;color:#111827;margin:0 0 10px}.lider-campus-label{color:#3b82f6;font-weight:700}.lider-activity{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.lider-activity-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:12px 0}.lider-grade-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-top:8px}.lider-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.modern-form-btn{padding:10px 18px;border:none;border-radius:8px;color:#fff;font-weight:600;cursor:pointer;display:inline-flex;gap:6px;align-items:center}.lider-btn-ok{background:#10b981}.lider-btn-no{background:#f59e0b}.lider-btn-del{background:#dc2626}.tm-dark-toggle{padding:.5rem}.tm-count{font-size:13px;color:#6b7280;background:#f3f4f6;padding:6px 12px;border-radius:20px}.lider-summary{margin-bottom:16px}.lider-summary-label{display:block;font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;margin-bottom:8px}.lider-chips{display:flex;flex-wrap:wrap;gap:8px}.lider-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid #e2e8f0;border-radius:20px;background:#fff;color:#374151;font-size:13px;cursor:pointer}.lider-chip.active{background:#3b82f6;border-color:#3b82f6;color:#fff}.lider-chip-count{min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;background:#f59e0b;color:#fff;font-size:11px;font-weight:700}.tm-ctrl{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:12px;padding:12px 16px;margin-bottom:16px}.tm-search{position:relative;display:flex;align-items:center;flex:1 1 220px}.tm-search svg{position:absolute;left:10px;width:16px;height:16px;color:#9ca3af}.tm-search input{width:100%;padding-left:34px}.tm-ctrl input,.tm-ctrl select{font-size:13px;border:1px solid #d1d5db;border-radius:8px;background:#fff;padding:9px 12px}.tm-ctrl select{min-width:160px}.tm-btn{padding:9px 16px;border:none;border-radius:8px;color:#fff;font-weight:600;cursor:pointer}.tm-btn-s{background:#4b5563}html.tm-dark body,html.tm-dark body.bg-amarillo,html.tm-dark body.bg-verde{background:#0f172a}html.tm-dark .modern-header,html.tm-dark .modern-card,html.tm-dark .lider-activity{background:#1e293b;border-color:#334155}html.tm-dark .modern-title,html.tm-dark .lider-value,html.tm-dark .modern-td,html.tm-dark .lider-activity-title{color:#e2e8f0}html.tm-dark .modern-th{background:#273449;color:#94a3b8}html.tm-dark .modern-nav-item{color:#cbd5e1}html.tm-dark .modern-select,html.tm-dark .modern-textarea,html.tm-dark .tm-ctrl input,html.tm-dark .tm-ctrl select{background:#0f172a;border-color:#334155;color:#e2e8f0}html.tm-dark .tm-count,html.tm-dark .lider-chip{background:#273449;border-color:#334155;color:#cbd5e1}.alumno-dropdown{min-width:18rem;padding:.5rem;background:#fff;border:1px solid #e5e7eb;border-radius:.375rem;box-shadow:0 10px 15px -3px rgba(0,0,0,.1)}.alumno-search-wrap{position:relative;display:flex;align-items:center;margin-bottom:.5rem}.alumno-search-wrap svg{position:absolute;left:.6rem;width:16px;height:16px;color:#9ca3af}.alumno-search{width:100%;padding:.5rem .6rem .5rem 2rem;border:1px solid #e5e7eb;border-radius:.375rem;font-size:.875rem;outline:none}.alumno-list{max-height:18rem;overflow-y:auto}.alumno-campus-head{padding:.4rem .5rem .25rem;font-size:.7rem;font-weight:700;text-transform:uppercase;color:#9ca3af}.alumno-item{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.55rem .6rem;border-radius:.375rem;text-decoration:none}.alumno-item:hover{background:#eef2ff}.alumno-name{font-size:.875rem;color:#1f2937;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.alumno-mat{flex-shrink:0;font-size:.7rem;font-weight:600;color:#4f46e5;background:#eef2ff;padding:.15rem .4rem;border-radius:.25rem}html.tm-dark .alumno-dropdown{background:#1e293b;border-color:#334155}html.tm-dark .alumno-search{background:#0f172a;border-color:#334155;color:#e2e8f0}html.tm-dark .alumno-name{color:#e2e8f0}html.tm-dark .alumno-item:hover{background:#334155}html.tm-dark .alumno-mat{color:#c7d2fe;background:#312e81}`,
     months: {ENE:0,FEB:1,MAR:2,ABR:3,MAY:4,JUN:5,JUL:6,AGO:7,SEP:8,OCT:9,NOV:10,DIC:11},
     pages: ['ver_actividades.php', 'ver_pendientes.php', 'ver_validadas.php']
 };
@@ -213,7 +213,7 @@ const getUserInfo = () => {
 
 const setupDropdowns = () => {
     document.addEventListener('click', e => $$('.dropdown-menu').forEach(d => !d.closest('.dropdown-container').contains(e.target) && d.classList.remove('show')));
-    ['activities', 'user'].forEach(type => {
+    ['activities', 'user', 'porAlumno'].forEach(type => {
         const btn = $(`#${type}Dropdown`), menu = $(`#${type}Menu`);
         if (btn && menu) btn.onclick = e => {
             e.stopPropagation();
@@ -260,6 +260,78 @@ const getLeaderInfo = () => {
     return {userName, userInitial: userName.charAt(0).toUpperCase(), tipo};
 };
 
+// Rellena el menú desplegable "Por Alumno" con los alumnos cacheados
+const buildPorAlumnoMenu = () => {
+    const list = $('#alumnoList');
+    const btn = $('#porAlumnoDropdown');
+    if (!list || !btn) return;
+    const students = getValue('leaderStudents', []) || [];
+
+    // Sin cache aún: el botón lleva a la lista completa
+    if (!students.length) {
+        const menu = $('#porAlumnoMenu');
+        if (menu) menu.classList.remove('show');
+        btn.onclick = e => { e.stopPropagation(); location.href = 'elige_alumno.php'; };
+        list.innerHTML = `<a href="elige_alumno.php" class="dropdown-item alumno-empty">Abrir lista de alumnos…</a>`;
+        return;
+    }
+
+    // Agrupar por campus, ordenar por nombre
+    const byCampus = new Map();
+    students.forEach(s => {
+        if (!byCampus.has(s.campus)) byCampus.set(s.campus, []);
+        byCampus.get(s.campus).push(s);
+    });
+
+    list.innerHTML = '';
+    [...byCampus.keys()].sort().forEach(campus => {
+        if (campus) {
+            const head = document.createElement('div');
+            head.className = 'alumno-campus-head';
+            head.textContent = campus;
+            list.appendChild(head);
+        }
+        byCampus.get(campus)
+            .sort((a, b) => a.nombre.localeCompare(b.nombre))
+            .forEach(s => {
+                const a = document.createElement('a');
+                a.href = `ver_actividades_alumno_calificar.php?matricula=${encodeURIComponent(s.matricula)}`;
+                a.className = 'dropdown-item alumno-item';
+                a.dataset.search = `${s.nombre} ${s.matricula}`.toLowerCase();
+                const name = document.createElement('span');
+                name.className = 'alumno-name';
+                name.textContent = s.nombre;
+                const mat = document.createElement('span');
+                mat.className = 'alumno-mat';
+                mat.textContent = s.matricula;
+                a.appendChild(name);
+                a.appendChild(mat);
+                list.appendChild(a);
+            });
+    });
+
+    // Búsqueda dentro del menú
+    const search = $('#alumnoSearch');
+    if (search && !search.dataset.wired) {
+        search.dataset.wired = '1';
+        search.addEventListener('click', e => e.stopPropagation());
+        search.addEventListener('input', () => {
+            const q = search.value.trim().toLowerCase();
+            list.querySelectorAll('.alumno-item').forEach(it => {
+                it.style.display = it.dataset.search.includes(q) ? '' : 'none';
+            });
+            list.querySelectorAll('.alumno-campus-head').forEach(h => {
+                let next = h.nextElementSibling, any = false;
+                while (next && !next.classList.contains('alumno-campus-head')) {
+                    if (next.classList.contains('alumno-item') && next.style.display !== 'none') { any = true; break; }
+                    next = next.nextElementSibling;
+                }
+                h.style.display = any ? '' : 'none';
+            });
+        });
+    }
+};
+
 const createLeaderHeader = () => {
     const {userName, userInitial, tipo} = getLeaderInfo();
     const header = document.createElement('div');
@@ -275,7 +347,13 @@ const createLeaderHeader = () => {
                 <a href="ver_actividades.php" class="modern-nav-item">${svg('activities')}<span>Actividades</span></a>
                 <a href="ver_pendientes.php" class="modern-nav-item">${svg('clock')}<span>Pendientes</span></a>
                 <a href="ver_validadas.php" class="modern-nav-item">${svg('check')}<span>Validadas</span></a>
-                <a href="elige_alumno.php" class="modern-nav-item">${svg('users')}<span>Por Alumno</span></a>
+                <div class="dropdown-container" id="porAlumnoContainer">
+                    <button class="modern-nav-item" id="porAlumnoDropdown">${svg('users')}<span>Por Alumno</span>${svg('chevron', 'chevron')}</button>
+                    <div class="dropdown-menu alumno-dropdown" id="porAlumnoMenu">
+                        <div class="alumno-search-wrap">${svg('search')}<input type="text" class="alumno-search" id="alumnoSearch" placeholder="Buscar alumno..."></div>
+                        <div class="alumno-list" id="alumnoList"></div>
+                    </div>
+                </div>
             </nav>
             <div class="dropdown-container">
                 <button class="modern-user-menu" id="userDropdown">
@@ -292,6 +370,7 @@ const createLeaderHeader = () => {
         </div>`;
     document.body.insertBefore(header, document.body.firstChild);
     setupDropdowns();
+    buildPorAlumnoMenu();
 };
 
 const createHeader = () => {
@@ -941,6 +1020,25 @@ const modernizeLeaderList = () => {
         if (table) groups.push({campus, table});
     });
 
+    // Cachear alumnos (matrícula + nombre + campus) para el menú "Por Alumno"
+    const students = [];
+    const seen = new Set();
+    groups.forEach(({campus, table}) => {
+        table.querySelectorAll('a[href*="ver_actividades_alumno_calificar"]').forEach(a => {
+            const m = (a.getAttribute('href') || '').match(/matricula=([^&]+)/);
+            if (!m) return;
+            const matricula = decodeURIComponent(m[1]);
+            if (seen.has(matricula)) return;
+            seen.add(matricula);
+            const nombre = a.closest('td')?.nextElementSibling?.textContent?.trim() || matricula;
+            students.push({matricula, nombre, campus});
+        });
+    });
+    if (students.length) {
+        saveValue('leaderStudents', students);
+        buildPorAlumnoMenu();
+    }
+
     main.innerHTML = `<div class="modern-card"><div class="modern-card-header"><h2 class="modern-title">${title}</h2></div><div class="modern-card-content" id="leaderGroups"></div></div>`;
     const container = $('#leaderGroups');
 
@@ -1141,7 +1239,7 @@ const modernizeLeaderPendientes = () => {
                     <div class="lider-chips" id="pendChips"></div>
                 </div>
                 <div class="tm-ctrl lider-ctrl">
-                    <div class="tm-search">${svg('search')}<input type="search" id="pendSearch" placeholder="Buscar matrícula, nombre, tipo…"></div>
+                    <div class="tm-search">${svg('search')}<input type="search" id="pendSearch" placeholder="    Buscar matrícula, nombre, tipo…"></div>
                     <select id="pendAlumno"><option value="">Todos los alumnos</option>${alumnoOpts}</select>
                     <select id="pendTipo"><option value="">Todos los tipos</option>${tipoOpts}</select>
                     <select id="pendModulo"><option value="">Todos los módulos</option>${moduloOpts}</select>
