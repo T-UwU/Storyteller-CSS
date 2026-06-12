@@ -607,6 +607,9 @@ const addEditToActivityDetail = () => {
     borrar.parentNode.insertBefore(row, borrar);
     row.appendChild(btn);
     row.appendChild(borrar);
+    // El CSS le pone `margin:0 auto` al Borrar; dentro del flex ese auto se come el
+    // espacio libre y empuja a Editar. Lo anulamos.
+    borrar.style.margin = '0';
 };
 
 // Tras crear la copia, ofrece borrar la original (en una página que NO sea el formulario)
