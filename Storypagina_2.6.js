@@ -1289,7 +1289,17 @@ const modernizeLeaderPendientes = () => {
         });
         countLabel.textContent = `${visible} / ${rows.length} por revisar`;
         chips.querySelectorAll('.lider-chip').forEach(c => c.classList.toggle('active', c.dataset.mat === mat));
+        saveValue('pendFilters', {q: searchInput.value, mat, tipo, mod});
     };
+
+    // Restaurar filtros guardados (si la opción ya no existe, el value queda vacío)
+    const savedFilters = getValue('pendFilters', null);
+    if (savedFilters) {
+        searchInput.value = savedFilters.q || '';
+        alumnoSel.value = savedFilters.mat || '';
+        tipoSel.value = savedFilters.tipo || '';
+        moduloSel.value = savedFilters.mod || '';
+    }
 
     // Chips por alumno (orden por cantidad de pendientes, desc)
     studentsByCount.forEach(([mat, s]) => {
