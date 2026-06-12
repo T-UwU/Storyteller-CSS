@@ -753,9 +753,9 @@ body.bg-verde {
     pointer-events: none;
 }
 
-.tm-search input {
+.tm-ctrl .tm-search input {
     width: 100%;
-    padding-left: 34px;
+    padding: 9px 12px 9px 36px;
 }
 
 .tm-ctrl input,
